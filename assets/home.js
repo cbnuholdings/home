@@ -35,7 +35,7 @@
       desc: '모집 중인 지원사업과 제작 지원 프로그램을 한 곳에서 확인하세요.',
       items: [
         { name: 'MVP 제작 지원', note: '시제품 제작 신청', href: 'https://mvp.cbnuholdings.com/' },
-        { name: 'CBNU-LIPS', note: 'LIPS 추천권 운영관리', href: 'https://lips-ops.cbnuholdings.com' }
+        { name: 'CBNU-LIPS', note: 'LIPS 운영관리 · 준비 중', href: 'https://www.cbnuholdings.com/lips' }
       ] }
   ];
   var CATS = [

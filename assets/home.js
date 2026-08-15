@@ -121,7 +121,8 @@
       }).join('') + '</div>' +
       '<div class="cb-guide" data-reveal><div><h3>어디로 가야 할지 모르겠다면</h3><p>미팅·상담 예약 한 번이면 담당자가 알맞은 프로그램으로 안내합니다.</p>' +
         '<a class="cb-btn cb-btn-primary" href="' + LINKS.booking + '" target="_blank" rel="noopener">미팅·상담 예약 →</a></div>' +
-        '<img src="' + BASE + '/assets/character.png" alt="" loading="lazy"></div>' +
+        // character.png 는 캐릭터가 2줄로 들어 있어 잘라 쓰면 윗줄 발이 걸린다 → 아랫줄만 담은 character-cta.png 를 통째로 쓴다
+        '<img src="' + BASE + '/assets/character-cta.png" alt="" loading="lazy"></div>' +
     '</div></section>';
   }
   function portfolioHTML() {

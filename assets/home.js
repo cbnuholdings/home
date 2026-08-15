@@ -244,11 +244,20 @@
     ['cbnu-home', 'cbnu-home-tail'].forEach(function (id) { var n = document.getElementById(id); if (n && n.parentNode) n.parentNode.removeChild(n); });
     document.documentElement.classList.remove('cbnu-oopy');
   }
-  function injectOopy() {
+  // React 하이드레이션이 끝났는지: DOM 노드에 __reactFiber$… 키가 붙으면 끝난 것(먼저 넣으면 #418 불일치)
+  function hydrated(node) {
+    if (!node) return false;
+    var ks = Object.keys(node);
+    for (var i = 0; i < ks.length; i++) if (ks[i].indexOf('__reactFiber') === 0 || ks[i].indexOf('__reactInternalInstance') === 0) return true;
+    return false;
+  }
+  var FORCE_AFTER = 40; // 300ms × 40 = 12초 넘게 하이드레이션 신호가 없으면 그냥 넣는다
+  function injectOopy(force) {
     if (document.getElementById('cbnu-home')) return true;
     var scroller = document.querySelector('.notion-scroller');
     var content = document.querySelector('.notion-page-content');
     if (!scroller || !content) return false;
+    if (!force && !hydrated(content) && !hydrated(scroller)) return false;
     var col = scroller.firstElementChild || scroller;
     document.documentElement.classList.add('cbnu-oopy');
     var home = el('<div id="cbnu-home"></div>');
@@ -266,10 +275,17 @@
     var tries = 0;
     var tick = function () {
       if (!pathAllowed()) { removeInjected(); return; }
-      if (!injectOopy() && ++tries < 60) return; // 최대 ~18초 대기(하이드레이션)
+      tries++;
+      injectOopy(tries > FORCE_AFTER);
     };
     tick();
     setInterval(tick, 300);
+    // Next.js 라우터 이벤트(있으면) — SPA 페이지 전환 후 재판정
+    try {
+      if (window.next && window.next.router && window.next.router.events) {
+        window.next.router.events.on('routeChangeComplete', function () { setTimeout(tick, 80); });
+      }
+    } catch (e) {}
     // SPA 라우팅 감지: history 패치 + popstate
     ['pushState', 'replaceState'].forEach(function (m) {
       var orig = history[m]; if (!orig) return;
@@ -278,7 +294,7 @@
     window.addEventListener('popstate', function () { setTimeout(tick, 50); });
     // oopy가 페이지를 다시 그리면(삽입물이 사라지면) 다시 넣는다
     if (typeof MutationObserver === 'function') {
-      var mo = new MutationObserver(function () { if (pathAllowed() && !document.getElementById('cbnu-home')) injectOopy(); });
+      var mo = new MutationObserver(function () { if (pathAllowed() && !document.getElementById('cbnu-home')) injectOopy(tries > FORCE_AFTER); });
       mo.observe(document.body, { childList: true, subtree: true });
     }
   }

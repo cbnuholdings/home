@@ -34,6 +34,7 @@
     { id: 'hub-project', num: '03', label: 'Program', ko: '지원사업',
       desc: '모집 중인 지원사업과 제작 지원 프로그램을 한 곳에서 확인하세요.',
       items: [
+        { name: 'CBNU-INNO', note: '창업기획 접수·신청', href: 'https://inno.cbnuholdings.com' },
         { name: 'MVP 제작 지원', note: '시제품 제작 신청', href: 'https://mvp.cbnuholdings.com/' },
         { name: 'CBNU-LIPS', note: 'LIPS 운영관리 · 준비 중', href: 'https://www.cbnuholdings.com/lips' }
       ] }

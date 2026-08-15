@@ -186,9 +186,10 @@
         '<a class="cb-more" href="' + LINKS.notices + '" target="_blank" rel="noopener">지원사업 공지 전체 보기 →</a></div>' +
       '<div class="cb-notices" data-reveal>' + (shown.length ? shown.map(noticeCard).join('') : '<div class="cb-grid-empty">등록된 공지가 없습니다.</div>') + '</div>' +
       (items.length > LIMITN ? '<div class="cb-more-wrap"><button type="button" class="cb-btn cb-btn-ghost cb-more-btn" data-notice-more>공지 ' + (items.length - LIMITN) + '건 더 보기 <span>↓</span></button></div>' : '') +
-      (quick.length ? '<div class="cb-quick" data-reveal><div class="cb-quick-head"><span class="cb-eyebrow">QUICK LINKS</span><h3>바로가기</h3></div><div class="cb-quick-grid">' + quick.map(function (q) {
-        return '<a class="cb-quick-card" href="' + esc(q.href) + '" target="_blank" rel="noopener"><span class="cb-quick-ico">' + quickIcon(q) + '</span><span class="cb-quick-txt"><b>' + esc(q.label) + '</b><small>' + esc(quickSub(q)) + '</small></span><i>↗</i></a>'; }).join('') + '</div></div>' : '') +
-    '</div></section>';
+    '</div>' +
+      (quick.length ? '<div class="cb-quick" id="quick"><div class="cb-wrap"><div class="cb-head" data-reveal><div><div class="cb-eyebrow">QUICK LINKS</div><h2 class="cb-h2">바로가기</h2></div><p class="cb-lead">자주 찾는 채널과 관련 기관으로 바로 이동합니다.</p></div><div class="cb-quick-grid" data-reveal>' + quick.map(function (q) {
+        return '<a class="cb-quick-card" href="' + esc(q.href) + '" target="_blank" rel="noopener"><span class="cb-quick-ico">' + quickIcon(q) + '</span><span class="cb-quick-txt"><b>' + esc(q.label) + '</b><small>' + esc(quickDesc(q)) + '</small></span><span class="cb-quick-go">바로가기 <i>↗</i></span></a>'; }).join('') + '</div></div></div>' : '') +
+    '</section>';
   }
   function quickIcon(q) {
     var t = (q.label || '') + ' ' + (q.href || '');
@@ -199,6 +200,16 @@
     if (/충북대|cbnu\.ac\.kr/i.test(t)) return '🏫';
     if (/예약|booking|meeting/i.test(t)) return '📅';
     return '🔗';
+  }
+  function quickDesc(q) {
+    var t = (q.label || '') + ' ' + (q.href || '');
+    if (/카카오|kakao/i.test(t)) return '카카오톡으로 문의·소식 받기';
+    if (/mail|이메일|메일/i.test(t)) return quickSub(q);
+    if (/기술마켓|tmarket/i.test(t)) return '충북대 보유기술 검색·기술이전';
+    if (/산학협력|sanhak/i.test(t)) return '충북대학교 산학협력단 홈페이지';
+    if (/충북대|cbnu\.ac\.kr/i.test(t)) return '충북대학교 홈페이지';
+    if (/예약|booking|meeting/i.test(t)) return '미팅·상담 예약';
+    return quickSub(q);
   }
   function quickSub(q) {
     var h = q.href || '';

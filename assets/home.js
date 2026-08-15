@@ -130,6 +130,9 @@
       '<div class="cb-count" data-reveal></div>' +
     '</div></section>';
   }
+  function midHTML() {
+    return '<div id="cbnu-home-mid">' + servicesHTML() + portfolioHTML() + '</div>';
+  }
   function tailHTML(withFooter) {
     return '<div id="cbnu-home-tail">' +
       '<section class="cb-contact" id="contact" aria-labelledby="cb-contact-h"><div class="cb-contact-glow"></div><div class="cb-wrap" data-reveal>' +
@@ -226,13 +229,13 @@
     home.appendChild(el(headerHTML()));
     home.appendChild(el(heroHTML()));
     home.appendChild(el(marqueeHTML()));
-    home.appendChild(el(servicesHTML()));
-    home.appendChild(el(portfolioHTML()));
     root.appendChild(home);
+    var mid = el(midHTML());
+    root.appendChild(mid);
     root.appendChild(el(tailHTML(true)));
     var hd = home.querySelector('.cb-header'), bg = home.querySelector('.cb-burger');
     if (bg) bg.addEventListener('click', function () { var o = hd.classList.toggle('is-open'); bg.setAttribute('aria-expanded', String(o)); });
-    bindFilters(home); loadData(home); bindReveal(root);
+    bindFilters(mid); loadData(mid); bindReveal(root);
   }
 
   /* ---------- oopy 모드 ---------- */
@@ -241,7 +244,7 @@
     return ALLOW.some(function (a) { a = a.replace(/\/+$/, '') || '/'; return a === p || (a !== '/' && p.indexOf(a) === 0); });
   }
   function removeInjected() {
-    ['cbnu-home', 'cbnu-home-tail'].forEach(function (id) { var n = document.getElementById(id); if (n && n.parentNode) n.parentNode.removeChild(n); });
+    ['cbnu-home', 'cbnu-home-mid', 'cbnu-home-tail'].forEach(function (id) { var n = document.getElementById(id); if (n && n.parentNode) n.parentNode.removeChild(n); });
     document.documentElement.classList.remove('cbnu-oopy');
   }
   // React 하이드레이션이 끝났는지: DOM 노드에 __reactFiber$… 키가 붙으면 끝난 것(먼저 넣으면 #418 불일치)
@@ -263,12 +266,15 @@
     var home = el('<div id="cbnu-home"></div>');
     home.appendChild(el(heroHTML()));
     home.appendChild(el(marqueeHTML()));
-    home.appendChild(el(servicesHTML()));
-    home.appendChild(el(portfolioHTML()));
     col.insertBefore(home, col.firstChild);
-    var tail = el(tailHTML(false));
-    if (content.parentNode) content.parentNode.insertBefore(tail, content.nextSibling);
-    bindFilters(home); loadData(home); bindReveal(document.body);
+    // 노션 본문(인사말 탭·NOTICE) 바로 아래에 성장지원 서비스 → 자회사 → 문의·푸터
+    var mid = el(midHTML());
+    var tail = el(tailHTML(true));
+    if (content.parentNode) {
+      content.parentNode.insertBefore(mid, content.nextSibling);
+      content.parentNode.insertBefore(tail, mid.nextSibling);
+    }
+    bindFilters(mid); loadData(mid); bindReveal(document.body);
     return true;
   }
   function runOopy() {

@@ -23,7 +23,7 @@ oopy/loader_staging.html   리뉴얼안(스테이징) 페이지용 로더
 
 ## 동작 원리 (oopy 모드)
 1. 노션 홈 페이지 최상단 `html` 코드블록에 `oopy/loader.html` 내용이 들어 있다. oopy는 이 블록의 `<head>`를 문서 head에, `<body>`를 페이지 끝에 주입한다.
-2. `home.js`가 `.notion-scroller`를 찾아 **커버 이미지 앞에 `#cbnu-home`(히어로·마퀴·서비스·자회사)** 을, **`.notion-page-content` 뒤에 `#cbnu-home-tail`(문의 CTA)** 을 삽입한다. 노션 커버·아이콘·페이지 제목은 CSS로만 숨긴다(블록은 그대로).
+2. `home.js`가 `.notion-scroller`를 찾아 **커버 이미지 앞에 `#cbnu-home`(히어로·마퀴)**, **`.notion-page-content` 뒤에 `#cbnu-home-mid`(성장지원 서비스·자회사) → `#cbnu-home-tail`(문의 CTA·푸터)** 순으로 삽입한다. 화면 순서 = 히어로 → 노션 본문(인사말 탭·NOTICE) → 성장지원 서비스 → 자회사 → 문의 → 푸터. 노션 커버·아이콘·페이지 제목은 CSS로만 숨긴다(블록은 그대로). 노션 본문에는 회사 정보 푸터를 두지 않는다(레이어 푸터가 담당).
 3. 노션 본문(인사말·오시는 길·연락처 탭, NOTICE, 푸터)은 그대로 렌더되고 §9 CSS로 톤만 맞춘다. **공지는 노션에서 고치면 즉시 반영**된다.
 4. `data-paths`에 없는 경로로 SPA 이동하면 삽입물을 제거한다(다른 페이지 오염 방지).
 

@@ -235,21 +235,22 @@
     '</a>';
   }
   function renderGrid(root) {
-    var grid = root.querySelector('.cb-grid'), count = root.querySelector('.cb-count');
+    var sec = root.querySelector('#portfolio') || root;
+    var grid = sec.querySelector('.cb-grid'), count = sec.querySelector('.cb-count');
     if (!grid) return;
     if (!DATA) { grid.innerHTML = '<div class="cb-grid-empty">자회사 정보를 불러오지 못했습니다. <a href="' + LINKS.portfolio + '" target="_blank" rel="noopener">자회사 현황 페이지</a>에서 확인해 주세요.</div>'; if (count) count.textContent = ''; return; }
     var items = FILTER === 'all' ? DATA.items : DATA.items.filter(function (c) { return c.cat === FILTER; });
     var shown = EXPANDED ? items : items.slice(0, LIMIT);
     grid.innerHTML = shown.length ? shown.map(cardHTML).join('') : '<div class="cb-grid-empty">해당 분야의 자회사가 아직 없습니다.</div>';
     Array.prototype.forEach.call(grid.children, function (c, i) { c.style.animationDelay = Math.min(i * 40, 400) + 'ms'; });
-    var more = root.querySelector('.cb-more-wrap');
+    var more = sec.querySelector('.cb-more-wrap');
     if (more) {
       if (items.length > shown.length) {
         more.innerHTML = '<button type="button" class="cb-btn cb-btn-ghost cb-more-btn">자회사 ' + (items.length - shown.length) + '개 더 보기 <span>↓</span></button>';
         more.querySelector('button').addEventListener('click', function () { EXPANDED = true; renderGrid(root); });
       } else if (EXPANDED && items.length > LIMIT) {
         more.innerHTML = '<button type="button" class="cb-btn cb-btn-ghost cb-more-btn">접기 <span>↑</span></button>';
-        more.querySelector('button').addEventListener('click', function () { EXPANDED = false; renderGrid(root); var sec = root.querySelector('#portfolio'); if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+        more.querySelector('button').addEventListener('click', function () { EXPANDED = false; renderGrid(root); sec.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
       } else more.innerHTML = '';
     }
     if (count) count.innerHTML = '총 ' + DATA.items.length + '개 자회사' + (FILTER !== 'all' ? ' 중 ' + items.length + '개 표시' : '') + ' · 출처 <a href="' + LINKS.portfolio + '" target="_blank" rel="noopener">자회사 공개 DB</a>';
@@ -264,7 +265,7 @@
     }
   }
   function bindFilters(root) {
-    var box = root.querySelector('.cb-filters'); if (!box) return;
+    var box = (root.querySelector('#portfolio') || root).querySelector('.cb-filters'); if (!box) return;
     box.addEventListener('click', function (e) {
       var b = e.target.closest('button[data-cat]'); if (!b) return;
       FILTER = b.getAttribute('data-cat'); EXPANDED = false;

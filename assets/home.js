@@ -131,18 +131,88 @@
     '</div></section>';
   }
   function midHTML() {
-    return '<div id="cbnu-home-mid">' + servicesHTML() + portfolioHTML() + '</div>';
+    return '<div id="cbnu-home-mid">' + noticeHTML(NOTICE) + servicesHTML() + portfolioHTML() + '</div>';
   }
+  /* ---------- 공지 (노션 본문에서 읽는다) ---------- */
+  var NOTICE = { items: [], quick: [], about: [] };
+  function txt(n) { return (n && (n.innerText || n.textContent) || '').replace(/\s+/g, ' ').trim(); }
+  function abs(href) { if (!href) return ''; if (/^https?:/i.test(href) || /^mailto:|^tel:/i.test(href)) return href; return 'https://www.cbnuholdings.com' + (href.charAt(0) === '/' ? '' : '/') + href; }
+  function parseNotionNotice(root) {
+    var out = { items: [], quick: [], about: [] };
+    if (!root) return out;
+    var mode = '', group = '';
+    Array.prototype.forEach.call(root.children, function (blk) {
+      var cls = (blk.className || '').toString();
+      var t = txt(blk);
+      if (/notion-header-block/.test(cls)) { mode = /NOTICE|공지/i.test(t) ? 'notice' : ''; group = ''; return; }
+      if (mode !== 'notice') return;
+      if (/notion-sub_header-block|notion-sub_sub_header-block|notion-header_4-block/.test(cls)) { group = t.replace(/^[^\w가-힣]+/, ''); return; }
+      if (/notion-divider-block/.test(cls)) return;
+      var a = blk.querySelector('a[href]');
+      if (/notion-page-block/.test(cls) && a) { out.about.push({ title: t, href: abs(a.getAttribute('href')) }); return; }
+      if (!/notion-bulleted_list-block|notion-numbered_list-block|notion-text-block/.test(cls) || !a) return;
+      var href = abs(a.getAttribute('href'));
+      var body = t.replace(/^[•·\-\s]+/, '');
+      if (/quick\s*links|바로가기/i.test(group)) {
+        var label = body.split(':')[0].replace(/[•·]/g, '').trim() || txt(a);
+        out.quick.push({ label: label, href: href });
+        return;
+      }
+      if (/회사소개/.test(group)) { out.about.push({ title: body, href: href }); return; }
+      var m = body.match(/\((\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})\)\s*$/);
+      var date = m ? (m[1] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[3]).slice(-2)) : '';
+      var titleEl = blk.querySelector('.notion-page-mention-token__title');
+      var title = titleEl ? txt(titleEl) : (m ? body.slice(0, m.index).trim() : txt(a) || body);
+      if (!title) return;
+      out.items.push({ group: group || '공지', title: title, href: href, date: date });
+    });
+    return out;
+  }
+  function noticeCard(n) {
+    var tag = /사업/.test(n.group) ? '사업공지' : /자료/.test(n.group) ? '자료실' : (n.group || '공지');
+    var d = n.date ? n.date.replace(/-/g, '.') : '';
+    return '<a class="cb-notice" href="' + esc(n.href) + '" target="_blank" rel="noopener">' +
+      '<div class="cb-notice-meta"><span class="cb-tag">' + esc(tag) + '</span>' + (d ? '<span class="cb-date">' + esc(d) + '</span>' : '') + '</div>' +
+      '<div class="cb-notice-title">' + esc(n.title) + '</div>' +
+      '<div class="cb-notice-more">자세히 보기 →</div></a>';
+  }
+  function sortedNotices(data) { return (data.items || []).slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); }); }
+  var LIMITN = 6;
+  function noticeHTML(data) {
+    var items = sortedNotices(data), shown = items.slice(0, LIMITN);
+    var quick = data.quick || [];
+    return '<section class="cb-news" id="news" aria-labelledby="cb-news-h"><div class="cb-wrap">' +
+      '<div class="cb-head" data-reveal><div><div class="cb-eyebrow">NOTICE</div><h2 class="cb-h2" id="cb-news-h">공지사항</h2></div>' +
+        '<a class="cb-more" href="' + LINKS.notices + '" target="_blank" rel="noopener">지원사업 공지 전체 보기 →</a></div>' +
+      '<div class="cb-notices" data-reveal>' + (shown.length ? shown.map(noticeCard).join('') : '<div class="cb-grid-empty">등록된 공지가 없습니다.</div>') + '</div>' +
+      (items.length > LIMITN ? '<div class="cb-more-wrap"><button type="button" class="cb-btn cb-btn-ghost cb-more-btn" data-notice-more>공지 ' + (items.length - LIMITN) + '건 더 보기 <span>↓</span></button></div>' : '') +
+      (quick.length ? '<div class="cb-quick" data-reveal><span class="cb-quick-label">🔗 바로가기</span>' + quick.map(function (q) {
+        return '<a href="' + esc(q.href) + '" target="_blank" rel="noopener">' + esc(q.label) + ' <i>↗</i></a>'; }).join('') + '</div>' : '') +
+    '</div></section>';
+  }
+  function bindNoticeMore(scope, data) {
+    var btn = scope.querySelector('[data-notice-more]'); if (!btn) return;
+    btn.addEventListener('click', function () {
+      var box = scope.querySelector('.cb-notices'); if (box) box.innerHTML = sortedNotices(data).map(noticeCard).join('');
+      if (btn.parentNode) btn.parentNode.removeChild(btn);
+    });
+  }
+  function aboutLinksHTML(about) {
+    return (about || []).map(function (p) { return '<a href="' + esc(p.href) + '">' + esc(p.title) + '</a>'; }).join('');
+  }
+
   function tailHTML(withFooter) {
     return '<div id="cbnu-home-tail">' +
       '<section class="cb-contact" id="contact" aria-labelledby="cb-contact-h"><div class="cb-contact-glow"></div><div class="cb-wrap" data-reveal>' +
         '<h2 id="cb-contact-h">공공기술이전 사업화 문의</h2>' +
         '<p class="cb-sub">대학·공공연구기관 기술의 이전과 사업화를 상담합니다. 아래 두 서비스는 오픈 준비 중입니다.</p>' +
         '<div class="cb-contact-btns"><span class="cb-soon a">기술이전 문의하기<em>준비 중</em></span><span class="cb-soon b">연구자 기술사업화<em>준비 중</em></span></div>' +
-        '<p class="cb-note">오픈 전까지는 <a href="' + LINKS.booking + '" target="_blank" rel="noopener">미팅·상담 예약</a>으로 문의해 주세요.</p>' +
+        '<p class="cb-note">오픈 전까지는 <a href="' + LINKS.booking + '" target="_blank" rel="noopener">미팅·상담 예약</a>으로 문의해 주세요.' +
+          (NOTICE.about && NOTICE.about.length ? '<br><span class="cb-note-links">' + aboutLinksHTML(NOTICE.about) + '</span>' : '') + '</p>' +
       '</div></section>' +
       (withFooter ? '<footer class="cb-footer"><div class="cb-wrap">' +
         '<div>충북대학교기술지주(주) · 대표자 김대일 · 사업자등록번호 579-87-00278<br>본사 충북 청주시 청원구 오창읍 양청4길 45 · TEL 043-249-1472(1489)</div>' +
+        (NOTICE.about && NOTICE.about.length ? '<div class="cb-foot-about"><span>회사소개</span>' + aboutLinksHTML(NOTICE.about) + '</div>' : '') +
         '<div class="cb-foot-links"><a href="' + LINKS.privacy + '" target="_blank" rel="noopener">개인정보처리방침</a><a href="' + LINKS.noEmail + '" target="_blank" rel="noopener">이메일무단수집거부</a><a href="' + LINKS.admin + '" target="_blank" rel="noopener">구성원 로그인</a><span>© 2026 CBNU Technology Holdings, Inc.</span></div>' +
       '</div></footer>' : '') +
     '</div>';
@@ -224,6 +294,11 @@
   /* ---------- 단독 모드 ---------- */
   function mountStandalone() {
     var root = document.getElementById('cbnu-home-root');
+    var url = BASE + '/data/notices.json?v=' + Math.floor(Date.now() / 300000);
+    var go = function (json) { if (json && json.items) NOTICE = json; mountStandalone2(root); };
+    if (window.fetch) fetch(url, { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(go).catch(function () { go(null); }); else go(null);
+  }
+  function mountStandalone2(root) {
     root.innerHTML = '';
     var home = el('<div id="cbnu-home"></div>');
     home.appendChild(el(headerHTML()));
@@ -235,7 +310,7 @@
     root.appendChild(el(tailHTML(true)));
     var hd = home.querySelector('.cb-header'), bg = home.querySelector('.cb-burger');
     if (bg) bg.addEventListener('click', function () { var o = hd.classList.toggle('is-open'); bg.setAttribute('aria-expanded', String(o)); });
-    bindFilters(mid); loadData(mid); bindReveal(root);
+    bindFilters(mid); loadData(mid); bindNoticeMore(mid, NOTICE); bindReveal(root);
   }
 
   /* ---------- oopy 모드 ---------- */
@@ -245,7 +320,7 @@
   }
   function removeInjected() {
     ['cbnu-home', 'cbnu-home-mid', 'cbnu-home-tail'].forEach(function (id) { var n = document.getElementById(id); if (n && n.parentNode) n.parentNode.removeChild(n); });
-    document.documentElement.classList.remove('cbnu-oopy');
+    document.documentElement.classList.remove('cbnu-oopy'); document.documentElement.classList.remove('cbnu-hide-body');
   }
   // React 하이드레이션이 끝났는지: DOM 노드에 __reactFiber$… 키가 붙으면 끝난 것(먼저 넣으면 #418 불일치)
   function hydrated(node) {
@@ -263,6 +338,9 @@
     if (!force && !hydrated(content) && !hydrated(scroller)) return false;
     var col = scroller.firstElementChild || scroller;
     document.documentElement.classList.add('cbnu-oopy');
+    NOTICE = parseNotionNotice(content);
+    // 공지를 읽었으면 노션 본문은 데이터 원천으로만 쓰고 화면에서는 숨긴다(레이어가 못 뜨면 본문이 그대로 보이는 안전망 유지)
+    if (NOTICE.items.length) document.documentElement.classList.add('cbnu-hide-body'); else document.documentElement.classList.remove('cbnu-hide-body');
     var home = el('<div id="cbnu-home"></div>');
     home.appendChild(el(heroHTML()));
     home.appendChild(el(marqueeHTML()));
@@ -274,7 +352,7 @@
       content.parentNode.insertBefore(mid, content.nextSibling);
       content.parentNode.insertBefore(tail, mid.nextSibling);
     }
-    bindFilters(mid); loadData(mid); bindReveal(document.body);
+    bindFilters(mid); loadData(mid); bindNoticeMore(mid, NOTICE); bindReveal(document.body);
     return true;
   }
   function runOopy() {

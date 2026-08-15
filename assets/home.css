@@ -115,6 +115,24 @@
 .cb-marquee-track { display: flex; width: max-content; animation: cb-marquee 34s linear infinite; }
 .cb-marquee-track > div { display: flex; gap: 52px; padding-right: 52px; font-size: 14px; font-weight: 600; letter-spacing: .04em; opacity: .9; white-space: nowrap; }
 
+/* ---------- 4.5 공지 카드 ---------- */
+.cb-news { background: #fff; }
+.cb-news .cb-wrap { padding-top: 96px; padding-bottom: 88px; }
+.cb-news .cb-more { font-size: 15px; font-weight: 700; }
+.cb-notices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+.cb-notice { display: flex; flex-direction: column; padding: 28px 26px 22px; border-radius: 22px; border: 1px solid rgba(23,18,20,.09); background: #fff; color: var(--cb-ink) !important; transition: transform .35s var(--cb-ease), box-shadow .35s, background .35s; animation: cb-rise .5s var(--cb-ease) both; }
+.cb-notice:hover { transform: translateY(-6px); box-shadow: 0 22px 48px rgba(23,18,20,.09); background: var(--cb-paper); }
+.cb-notice-meta { display: flex; align-items: center; gap: 10px; }
+.cb-tag { display: inline-flex; padding: 5px 11px; border-radius: 6px; background: var(--cb-primary); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .04em; }
+.cb-date { font-size: 13px; font-weight: 600; color: var(--cb-faint); }
+.cb-notice-title { margin-top: 16px; flex: 1; font-size: 18px; font-weight: 800; line-height: 1.45; letter-spacing: -.02em; text-wrap: pretty; }
+.cb-notice-more { margin-top: 18px; font-size: 13.5px; font-weight: 700; color: var(--cb-primary); }
+.cb-quick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--cb-line); }
+.cb-quick-label { font-size: 13px; font-weight: 800; color: var(--cb-muted); margin-right: 6px; }
+.cb-quick a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(23,18,20,.12); font-size: 13.5px; font-weight: 700; color: var(--cb-ink) !important; transition: border-color .25s, background .25s, color .25s; }
+.cb-quick a:hover { border-color: rgba(168,19,74,.4); background: var(--cb-paper); color: var(--cb-primary) !important; }
+.cb-quick a i { font-style: normal; color: var(--cb-primary); font-size: 12px; }
+
 /* ---------- 5. 성장지원 서비스 ---------- */
 .cb-services { position: relative; background: var(--cb-paper); border-top: 1px solid rgba(168,19,74,.10); }
 .cb-services .cb-wrap { padding-top: 100px; padding-bottom: 92px; }
@@ -187,6 +205,12 @@
 .cb-footer a { color: rgba(255,255,255,.55); }
 .cb-footer a:hover { color: #fff; }
 .cb-footer .cb-foot-links { display: flex; gap: 16px; flex-wrap: wrap; }
+.cb-footer .cb-foot-about { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+.cb-footer .cb-foot-about span { font-weight: 800; color: rgba(255,255,255,.7); }
+.cb-footer .cb-foot-about a { color: rgba(255,255,255,.75); font-weight: 600; }
+.cb-contact .cb-note-links { display: inline-flex; gap: 14px; margin-top: 10px; }
+.cb-contact .cb-note-links a { color: rgba(255,255,255,.75); text-decoration: none; font-weight: 600; }
+.cb-contact .cb-note-links a:hover { color: #fff; }
 
 /* ---------- 8. 반응형 ---------- */
 @media (max-width: 1024px) {
@@ -196,6 +220,7 @@
   .cb-ring.r2, .cb-ring.r3 { width: 240px; height: 240px; }
   .cb-disc { width: 236px; height: 236px; } .cb-disc img { width: 150px; }
   .cb-hubs { grid-template-columns: 1fr; }
+  .cb-notices { grid-template-columns: repeat(2, 1fr); }
   .cb-grid { grid-template-columns: repeat(2, 1fr); }
   .cb-guide { grid-template-columns: 1fr; }
   .cb-guide img { width: 100%; height: 120px; }
@@ -219,6 +244,8 @@
   .cb-scroll { display: none; }
   .cb-services .cb-wrap, .cb-portfolio .cb-wrap { padding-top: 64px; padding-bottom: 64px; }
   .cb-grid { grid-template-columns: 1fr; }
+  .cb-notices { grid-template-columns: 1fr; }
+  .cb-news .cb-wrap { padding-top: 64px; padding-bottom: 56px; }
   .cb-contact .cb-wrap { padding-top: 72px; padding-bottom: 72px; }
   .cb-soon { width: 100%; justify-content: center; }
 }
@@ -240,6 +267,7 @@ html.cbnu-oopy .notion-scroller .page-icon,
 html.cbnu-oopy .notion-scroller .notion-page-controls,
 html.cbnu-oopy .notion-scroller > div > .width.padding:has(.page-icon) { display: none !important; }
 html.cbnu-oopy .notion-page-content { padding-top: 40px !important; padding-bottom: 56px !important; }
+html.cbnu-oopy.cbnu-hide-body .notion-page-content { display: none !important; }
 html.cbnu-oopy .notion-page-content.width { max-width: 1180px !important; width: calc(100% - 56px) !important; }
 @media (max-width: 640px) { html.cbnu-oopy .notion-page-content.width { width: calc(100% - 40px) !important; } }
 /* 9-2. 헤딩·본문 리듬 */

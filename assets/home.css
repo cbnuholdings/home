@@ -127,11 +127,17 @@
 .cb-date { font-size: 13px; font-weight: 600; color: var(--cb-faint); }
 .cb-notice-title { margin-top: 16px; flex: 1; font-size: 18px; font-weight: 800; line-height: 1.45; letter-spacing: -.02em; text-wrap: pretty; }
 .cb-notice-more { margin-top: 18px; font-size: 13.5px; font-weight: 700; color: var(--cb-primary); }
-.cb-quick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--cb-line); }
-.cb-quick-label { font-size: 13px; font-weight: 800; color: var(--cb-muted); margin-right: 6px; }
-.cb-quick a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(23,18,20,.12); font-size: 13.5px; font-weight: 700; color: var(--cb-ink) !important; transition: border-color .25s, background .25s, color .25s; }
-.cb-quick a:hover { border-color: rgba(168,19,74,.4); background: var(--cb-paper); color: var(--cb-primary) !important; }
-.cb-quick a i { font-style: normal; color: var(--cb-primary); font-size: 12px; }
+.cb-quick { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--cb-line); }
+.cb-quick-head h3 { margin: 10px 0 0; font-size: 24px; font-weight: 800; letter-spacing: -.02em; }
+.cb-quick-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 22px; }
+.cb-quick-card { display: flex; align-items: center; gap: 12px; padding: 18px 18px; border-radius: 18px; background: var(--cb-paper); border: 1px solid rgba(23,18,20,.07); color: var(--cb-ink) !important; transition: transform .3s var(--cb-ease), box-shadow .3s, background .3s, border-color .3s; }
+.cb-quick-card:hover { transform: translateY(-5px); background: #fff; border-color: rgba(168,19,74,.32); box-shadow: 0 18px 40px rgba(23,18,20,.09); }
+.cb-quick-ico { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 42px; width: 42px; height: 42px; border-radius: 12px; background: #fff; border: 1px solid rgba(168,19,74,.14); font-size: 20px; }
+.cb-quick-card:hover .cb-quick-ico { background: var(--cb-paper); }
+.cb-quick-txt { min-width: 0; flex: 1; }
+.cb-quick-txt b { display: block; font-size: 14.5px; font-weight: 800; letter-spacing: -.01em; line-height: 1.35; }
+.cb-quick-txt small { display: block; margin-top: 3px; font-size: 12px; color: var(--cb-faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cb-quick-card i { font-style: normal; color: var(--cb-primary); font-weight: 800; font-size: 14px; }
 
 /* ---------- 5. 성장지원 서비스 ---------- */
 .cb-services { position: relative; background: var(--cb-paper); border-top: 1px solid rgba(168,19,74,.10); }
@@ -221,6 +227,7 @@
   .cb-disc { width: 236px; height: 236px; } .cb-disc img { width: 150px; }
   .cb-hubs { grid-template-columns: 1fr; }
   .cb-notices { grid-template-columns: repeat(2, 1fr); }
+  .cb-quick-grid { grid-template-columns: repeat(3, 1fr); }
   .cb-grid { grid-template-columns: repeat(2, 1fr); }
   .cb-guide { grid-template-columns: 1fr; }
   .cb-guide img { width: 100%; height: 120px; }
@@ -245,6 +252,8 @@
   .cb-services .cb-wrap, .cb-portfolio .cb-wrap { padding-top: 64px; padding-bottom: 64px; }
   .cb-grid { grid-template-columns: 1fr; }
   .cb-notices { grid-template-columns: 1fr; }
+  .cb-quick-grid { grid-template-columns: 1fr; }
+  .cb-quick { margin-top: 40px; padding-top: 28px; }
   .cb-news .cb-wrap { padding-top: 64px; padding-bottom: 56px; }
   .cb-contact .cb-wrap { padding-top: 72px; padding-bottom: 72px; }
   .cb-soon { width: 100%; justify-content: center; }

@@ -186,9 +186,25 @@
         '<a class="cb-more" href="' + LINKS.notices + '" target="_blank" rel="noopener">지원사업 공지 전체 보기 →</a></div>' +
       '<div class="cb-notices" data-reveal>' + (shown.length ? shown.map(noticeCard).join('') : '<div class="cb-grid-empty">등록된 공지가 없습니다.</div>') + '</div>' +
       (items.length > LIMITN ? '<div class="cb-more-wrap"><button type="button" class="cb-btn cb-btn-ghost cb-more-btn" data-notice-more>공지 ' + (items.length - LIMITN) + '건 더 보기 <span>↓</span></button></div>' : '') +
-      (quick.length ? '<div class="cb-quick" data-reveal><span class="cb-quick-label">🔗 바로가기</span>' + quick.map(function (q) {
-        return '<a href="' + esc(q.href) + '" target="_blank" rel="noopener">' + esc(q.label) + ' <i>↗</i></a>'; }).join('') + '</div>' : '') +
+      (quick.length ? '<div class="cb-quick" data-reveal><div class="cb-quick-head"><span class="cb-eyebrow">QUICK LINKS</span><h3>바로가기</h3></div><div class="cb-quick-grid">' + quick.map(function (q) {
+        return '<a class="cb-quick-card" href="' + esc(q.href) + '" target="_blank" rel="noopener"><span class="cb-quick-ico">' + quickIcon(q) + '</span><span class="cb-quick-txt"><b>' + esc(q.label) + '</b><small>' + esc(quickSub(q)) + '</small></span><i>↗</i></a>'; }).join('') + '</div></div>' : '') +
     '</div></section>';
+  }
+  function quickIcon(q) {
+    var t = (q.label || '') + ' ' + (q.href || '');
+    if (/카카오|kakao/i.test(t)) return '💬';
+    if (/mail|이메일|메일/i.test(t)) return '✉️';
+    if (/기술마켓|tmarket|기술이전/i.test(t)) return '🔬';
+    if (/산학협력|sanhak/i.test(t)) return '🤝';
+    if (/충북대|cbnu\.ac\.kr/i.test(t)) return '🏫';
+    if (/예약|booking|meeting/i.test(t)) return '📅';
+    return '🔗';
+  }
+  function quickSub(q) {
+    var h = q.href || '';
+    if (/^mailto:/i.test(h)) return h.replace(/^mailto:/i, '');
+    if (/^tel:/i.test(h)) return h.replace(/^tel:/i, '');
+    var m = h.match(/^https?:\/\/([^\/?#]+)/i); return m ? m[1].replace(/^www\./, '') : '';
   }
   function bindNoticeMore(scope, data) {
     var btn = scope.querySelector('[data-notice-more]'); if (!btn) return;

@@ -1,12 +1,18 @@
 <head>
-  <!-- CBNU Tech Holdings 인터랙티브 홈 로더 — 노션 홈 페이지 최상단 html 코드블록에 이 내용을 그대로 붙여넣는다.
-       실제 스타일·스크립트·데이터는 GitHub Pages(cbnuholdings.github.io/home)에서 온다. 코드는 git으로 관리한다.
-       data-paths: 삽입을 허용할 경로. 홈이면 "/" 만. 스테이징(리뉴얼안 페이지)에서 쓸 땐 그 페이지 경로를 넣는다. -->
+  <!-- CBNU Tech Holdings 인터랙티브 홈 로더 — 노션 홈 페이지 최상단 html 코드블록에 이 내용을 그대로 붙여넣는다. 실제 스타일·스크립트·데이터는 GitHub Pages(cbnuholdings.github.io/home)에서 온다.
+       자산 URL에 5분 단위 버전(?v=)을 붙여 GitHub Pages 캐시(10분)를 우회한다 → git push 후 늦어도 5분 안에 방문자에게 반영. -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cbnuholdings.github.io/home/assets/home.css">
-  <script defer src="https://cbnuholdings.github.io/home/assets/home.js" data-paths="/"></script>
   <script>
+    (function () {
+      var BASE = 'https://cbnuholdings.github.io/home';
+      var v = Math.floor(Date.now() / 300000);           // 5분 버킷
+      var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = BASE + '/assets/home.css?v=' + v;
+      document.head.appendChild(l);
+      var s = document.createElement('script'); s.defer = true; s.src = BASE + '/assets/home.js?v=' + v;
+      s.setAttribute('data-paths', '/');
+      document.head.appendChild(s);
+    })();
     function handleClick() { window.open('https://www.cbnuholdings.com/meeting-booking', '_blank'); }
   </script>
 </head>

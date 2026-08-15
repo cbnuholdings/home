@@ -185,7 +185,7 @@
     if (count) count.innerHTML = '총 ' + DATA.items.length + '개 자회사' + (FILTER !== 'all' ? ' 중 ' + items.length + '개 표시' : '') + ' · 출처 <a href="' + LINKS.portfolio + '" target="_blank" rel="noopener">자회사 공개 DB</a>' + (DATA.synced_at ? ' <span style="color:var(--cb-faint);font-weight:500">(동기화 ' + esc(String(DATA.synced_at).slice(0, 10)) + ')</span>' : '');
   }
   function loadData(root) {
-    var url = BASE + '/data/subsidiaries.json';
+    var url = BASE + '/data/subsidiaries.json?v=' + Math.floor(Date.now() / 300000);
     var done = function (json) { DATA = json && json.items ? json : null; renderGrid(root); };
     if (window.fetch) {
       fetch(url, { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(done).catch(function () { done(null); });

@@ -88,7 +88,7 @@
               '<span class="cb-line"><span>지역 <span class="cb-mark">기술혁신</span> 파트너</span></span></h1>' +
           '<p>연구실에 머물던 특허를 자회사·기술이전·투자로 연결합니다.<br>교내 연구자부터 지역 기업까지, 기술사업화의 모든 단계를 함께합니다.</p>' +
           '<div class="cb-hero-cta">' +
-            '<a class="cb-btn cb-btn-primary" href="#contact">기술이전 문의하기 <span>→</span></a>' +
+            '<a class="cb-btn cb-btn-primary" href="' + LINKS.ctom + '" target="_blank" rel="noopener">기술이전 문의하기 <span>→</span></a>' +
             '<a class="cb-btn cb-btn-ghost" href="' + LINKS.subsidiaryApply + '" target="_blank" rel="noopener">자회사 신청 <span style="color:var(--cb-primary)">↗</span></a>' +
             '<a class="cb-btn cb-btn-text" href="' + LINKS.subsidiaryIntro + '" target="_blank" rel="noopener">자회사 제도 소개 →</a>' +
           '</div>' +

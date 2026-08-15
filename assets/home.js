@@ -177,7 +177,7 @@
       '<div class="cb-notice-more">자세히 보기 →</div></a>';
   }
   function sortedNotices(data) { return (data.items || []).slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); }); }
-  var LIMITN = 6;
+  var LIMITN = 9; // 공지 카드 기본 노출(3열×3행) — 넘으면 「더 보기」
   function noticeHTML(data) {
     var items = sortedNotices(data), shown = items.slice(0, LIMITN);
     var quick = data.quick || [];

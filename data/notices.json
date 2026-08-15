@@ -47,7 +47,7 @@
   {
    "group": "자료실",
    "title": "자료실",
-   "href": "https://www.cbnuholdings.com/962e3480-46fc-4235-978b-d1c12cbb8cf8",
+   "href": "https://www.cbnuholdings.com/3bdfc8d8-805b-8127-b218-d595515c1847",
    "date": ""
   }
  ],
@@ -89,7 +89,11 @@
   {
    "title": "CBNU-LIPS",
    "href": "https://www.cbnuholdings.com/3bdfc8d8-805b-81ac-aee7-cd32a15c388b"
+  },
+  {
+   "title": "자료실",
+   "href": "https://www.cbnuholdings.com/3bdfc8d8-805b-8127-b218-d595515c1847"
   }
  ],
- "synced_at": "2026-08-15T12:57:37Z"
+ "synced_at": "2026-08-15T16:39:12Z"
 }

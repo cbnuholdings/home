@@ -48,7 +48,8 @@
     subsidiaryApply: 'https://subsidiary.cbnuholdings.com/',
     subsidiaryIntro: 'https://www.cbnuholdings.com/subsidiary',
     portfolio: 'https://www.cbnuholdings.com/portfolio',
-    notices: 'https://www.cbnuholdings.com/fa30f3e8-43c9-4100-ba35-e6ece607e753',
+    // 공지 「전체 보기」는 외부 링크가 아니라 이 섹션 안에서 전 건을 펼치는 기능이다(2026-08-15).
+    // 이전 notices 링크는 목록이 아니라 사업공지 글 1건(fa30f3e8…)으로 가고 있었다 → 제거.
     admin: 'https://www.cbnuholdings.com/admin',
     // C-TOM(연구자·공급측) / C-TOM-D(기업·수요측 `/market`) — 2026-08-15 라이브. 정식 기술이전 신청·계약은 산단 T-Market(아웃링크 · C-TOM-D 정본 §Ⅺ-3-1)
     ctomMarket: 'https://ctom.cbnuholdings.com/market',
@@ -174,8 +175,20 @@
     });
     return out;
   }
+  function noticeTag(n) {
+    return /사업/.test(n.group) ? '사업공지' : /자료/.test(n.group) ? '자료실' : (n.group || '공지');
+  }
+  // 카드 태그와 같은 규칙으로 분류칩을 만든다 — 둘이 갈리면 필터가 0건을 낸다
+  function noticeCats(items) {
+    var order = ['공지사항', '사업공지', '자료실'], out = [];
+    items.forEach(function (n) { var t = noticeTag(n); if (out.indexOf(t) < 0) out.push(t); });
+    return out.sort(function (a, b) {
+      var ia = order.indexOf(a), ib = order.indexOf(b);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    });
+  }
   function noticeCard(n) {
-    var tag = /사업/.test(n.group) ? '사업공지' : /자료/.test(n.group) ? '자료실' : (n.group || '공지');
+    var tag = noticeTag(n);
     var d = n.date ? n.date.replace(/-/g, '.') : '';
     return '<a class="cb-notice" href="' + esc(n.href) + '" target="_blank" rel="noopener">' +
       '<div class="cb-notice-meta"><span class="cb-tag">' + esc(tag) + '</span>' + (d ? '<span class="cb-date">' + esc(d) + '</span>' : '') + '</div>' +
@@ -187,10 +200,17 @@
   function noticeHTML(data) {
     var items = sortedNotices(data), shown = items.slice(0, LIMITN);
     var quick = data.quick || [];
+    var cats = ['전체'].concat(noticeCats(items));
     return '<section class="cb-news" id="news" aria-labelledby="cb-news-h"><div class="cb-wrap">' +
       '<div class="cb-head" data-reveal><div><div class="cb-eyebrow">NOTICE</div><h2 class="cb-h2" id="cb-news-h">공지사항</h2></div>' +
-        '<a class="cb-more" href="' + LINKS.notices + '" target="_blank" rel="noopener">지원사업 공지 전체 보기 →</a></div>' +
-      '<div class="cb-notices" data-reveal>' + (shown.length ? shown.map(noticeCard).join('') : '<div class="cb-grid-empty">등록된 공지가 없습니다.</div>') + '</div>' +
+        (items.length ? '<button type="button" class="cb-more cb-more-all" data-notice-all aria-expanded="false" aria-controls="cb-notice-list">공지사항 전체 보기 (' + items.length + ') <span>→</span></button>' : '') + '</div>' +
+      '<div class="cb-notice-tools" data-notice-tools hidden>' +
+        '<div class="cb-chips" role="group" aria-label="공지 분류">' + cats.map(function (c, i) {
+          return '<button type="button" class="cb-chip' + (i === 0 ? ' is-on' : '') + '" data-notice-cat="' + esc(c) + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '">' + esc(c) + '</button>';
+        }).join('') + '</div>' +
+        '<label class="cb-notice-search"><span aria-hidden="true">🔍</span><input type="search" placeholder="공지 제목 검색" data-notice-q aria-label="공지 제목 검색"></label>' +
+      '</div>' +
+      '<div class="cb-notices" id="cb-notice-list" data-reveal aria-live="polite">' + (shown.length ? shown.map(noticeCard).join('') : '<div class="cb-grid-empty">등록된 공지가 없습니다.</div>') + '</div>' +
       (items.length > LIMITN ? '<div class="cb-more-wrap"><button type="button" class="cb-btn cb-btn-ghost cb-more-btn" data-notice-more>공지 ' + (items.length - LIMITN) + '건 더 보기 <span>↓</span></button></div>' : '') +
     '</div>' +
       (quick.length ? '<div class="cb-quick" id="quick"><div class="cb-wrap"><div class="cb-head" data-reveal><div><div class="cb-eyebrow">QUICK LINKS</div><h2 class="cb-h2">바로가기</h2></div><p class="cb-lead">자주 찾는 채널과 관련 기관으로 바로 이동합니다.</p></div><div class="cb-quick-grid" data-reveal>' + quick.map(function (q) {
@@ -227,12 +247,55 @@
     if (/^tel:/i.test(h)) return h.replace(/^tel:/i, '');
     var m = h.match(/^https?:\/\/([^\/?#]+)/i); return m ? m[1].replace(/^www\./, '') : '';
   }
-  function bindNoticeMore(scope, data) {
-    var btn = scope.querySelector('[data-notice-more]'); if (!btn) return;
-    btn.addEventListener('click', function () {
-      var box = scope.querySelector('.cb-notices'); if (box) box.innerHTML = sortedNotices(data).map(noticeCard).join('');
-      if (btn.parentNode) btn.parentNode.removeChild(btn);
+  // 공지 「전체 보기」 — 노션 본문에서 읽은 전 건을 분류·검색과 함께 이 자리에서 펼친다.
+  // 별도 목록 페이지를 두지 않는 이유: 노션 홈 NOTICE 목록이 유일한 정본이고, 여기서 그리면 공지를 추가해도 자동으로 따라온다.
+  function bindNotices(scope, data) {
+    var box = scope.querySelector('.cb-notices'); if (!box) return;
+    var items = sortedNotices(data);
+    var allBtn = scope.querySelector('[data-notice-all]');
+    var tools = scope.querySelector('[data-notice-tools]');
+    var moreWrap = scope.querySelector('.cb-more-wrap');
+    var moreBtn = scope.querySelector('[data-notice-more]');
+    var qEl = scope.querySelector('[data-notice-q]');
+    var chips = Array.prototype.slice.call(scope.querySelectorAll('[data-notice-cat]'));
+    var open = false, cat = '전체', q = '';
+
+    function visible() {
+      if (!open) return items.slice(0, LIMITN);
+      var kw = q.trim().toLowerCase();
+      return items.filter(function (n) {
+        if (cat !== '전체' && noticeTag(n) !== cat) return false;
+        return !kw || (n.title || '').toLowerCase().indexOf(kw) >= 0;
+      });
+    }
+    function render() {
+      var list = visible();
+      box.innerHTML = list.length ? list.map(noticeCard).join('')
+        : '<div class="cb-grid-empty">' + (open ? '조건에 맞는 공지가 없습니다.' : '등록된 공지가 없습니다.') + '</div>';
+      if (tools) tools.hidden = !open;
+      if (moreWrap) moreWrap.hidden = open;
+      if (allBtn) {
+        allBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        allBtn.innerHTML = open ? '공지 접기 <span>↑</span>' : '공지사항 전체 보기 (' + items.length + ') <span>→</span>';
+      }
+    }
+    function setCat(v) {
+      cat = v;
+      chips.forEach(function (c) {
+        var on = c.getAttribute('data-notice-cat') === v;
+        c.classList.toggle('is-on', on);
+        c.setAttribute('aria-pressed', String(on));
+      });
+    }
+    function openAll() { open = true; render(); }
+    function closeAll() { open = false; setCat('전체'); q = ''; if (qEl) qEl.value = ''; render(); }
+
+    if (allBtn) allBtn.addEventListener('click', function () { if (open) closeAll(); else openAll(); });
+    if (moreBtn) moreBtn.addEventListener('click', openAll); // 9건 초과 「더 보기」도 같은 전체 보기로 합류시킨다
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () { setCat(c.getAttribute('data-notice-cat')); render(); });
     });
+    if (qEl) qEl.addEventListener('input', function () { q = qEl.value || ''; render(); });
   }
   function aboutLinksHTML(about) {
     return (about || []).map(function (p) { return '<a href="' + esc(p.href) + '">' + esc(p.title) + '</a>'; }).join('');
@@ -351,7 +414,7 @@
     root.appendChild(el(tailHTML(true)));
     var hd = home.querySelector('.cb-header'), bg = home.querySelector('.cb-burger');
     if (bg) bg.addEventListener('click', function () { var o = hd.classList.toggle('is-open'); bg.setAttribute('aria-expanded', String(o)); });
-    bindFilters(mid); loadData(mid); bindNoticeMore(mid, NOTICE); bindReveal(root);
+    bindFilters(mid); loadData(mid); bindNotices(mid, NOTICE); bindReveal(root);
   }
 
   /* ---------- oopy 모드 ---------- */
@@ -393,7 +456,7 @@
       content.parentNode.insertBefore(mid, content.nextSibling);
       content.parentNode.insertBefore(tail, mid.nextSibling);
     }
-    bindFilters(mid); loadData(mid); bindNoticeMore(mid, NOTICE); bindReveal(document.body);
+    bindFilters(mid); loadData(mid); bindNotices(mid, NOTICE); bindReveal(document.body);
     return true;
   }
   function runOopy() {

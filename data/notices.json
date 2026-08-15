@@ -53,24 +53,20 @@
  ],
  "quick": [
   {
-   "label": "충북대기술지주 카카오채널",
-   "href": "https://pf.kakao.com/_mhxdjX"
-  },
-  {
-   "label": "이메일",
-   "href": "mailto:cbnuholdings@cbnu.ac.kr"
+   "label": "충북대학교산학협력단",
+   "href": "https://sanhak.cbnu.ac.kr/"
   },
   {
    "label": "기술마켓",
    "href": "https://tmarket.cbnu.ac.kr/jobedu/category.do?key=2009172181368&goMain=Y"
   },
   {
-   "label": "충북대학교",
-   "href": "https://www.cbnu.ac.kr/www/index.do"
+   "label": "충북대기술지주 카카오채널",
+   "href": "https://pf.kakao.com/_mhxdjX"
   },
   {
-   "label": "충북대학교산학협력단",
-   "href": "https://sanhak.cbnu.ac.kr/"
+   "label": "자회사 신청",
+   "href": "https://subsidiary.cbnuholdings.com/"
   }
  ],
  "about": [
@@ -87,5 +83,5 @@
    "href": "https://www.cbnuholdings.com/3bdfc8d8-805b-819e-86ff-cd0caae8359d"
   }
  ],
- "synced_at": "2026-08-15T08:05:20Z"
+ "synced_at": "2026-08-15T09:37:44Z"
 }

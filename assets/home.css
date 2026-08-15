@@ -130,7 +130,7 @@
 .cb-quick { background: linear-gradient(180deg, #fff 0%, var(--cb-paper) 38%, #FBEFF3 100%); border-top: 1px solid rgba(168,19,74,.10); }
 .cb-quick .cb-wrap { padding-top: 84px; padding-bottom: 84px; }
 .cb-quick .cb-lead { margin: 0; max-width: 420px; font-size: 16px; line-height: 1.75; color: #6B6165; }
-.cb-quick-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 40px; }
+.cb-quick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; }  /* 항목 수에 따라 자동 배치(추가 예정) */
 .cb-quick-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px 22px 20px; min-height: 196px; border-radius: 22px; background: #fff; border: 1px solid rgba(23,18,20,.08); color: var(--cb-ink) !important; transition: transform .35s var(--cb-ease), box-shadow .35s, border-color .35s; }
 .cb-quick-card:hover { transform: translateY(-8px); border-color: rgba(168,19,74,.36); box-shadow: 0 26px 54px rgba(23,18,20,.11); }
 .cb-quick-ico { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 16px; background: rgba(168,19,74,.09); border: 1px solid rgba(168,19,74,.16); font-size: 25px; }
@@ -141,7 +141,6 @@
 .cb-quick-go { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 800; color: var(--cb-primary); }
 .cb-quick-go i { font-style: normal; transition: transform .3s var(--cb-ease); }
 .cb-quick-card:hover .cb-quick-go i { transform: translate(2px, -2px); }
-@media (max-width: 1240px) { .cb-quick-grid { grid-template-columns: repeat(3, 1fr); } }
 
 /* ---------- 5. 성장지원 서비스 ---------- */
 .cb-services { position: relative; background: var(--cb-paper); border-top: 1px solid rgba(168,19,74,.10); }
@@ -256,7 +255,9 @@
   .cb-services .cb-wrap, .cb-portfolio .cb-wrap { padding-top: 64px; padding-bottom: 64px; }
   .cb-grid { grid-template-columns: 1fr; }
   .cb-notices { grid-template-columns: 1fr; }
-  .cb-quick-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 28px; }
+  .cb-quick-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 28px; }
+  .cb-quick-card { flex-direction: row; align-items: center; }
+  .cb-quick-card .cb-quick-go { display: none; }
   .cb-quick-card { min-height: 0; padding: 18px 16px 16px; gap: 12px; }
   .cb-quick-ico { width: 44px; height: 44px; font-size: 21px; }
   .cb-quick-txt b { font-size: 15px; }

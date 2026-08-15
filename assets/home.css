@@ -127,7 +127,7 @@
 .cb-date { font-size: 13px; font-weight: 600; color: var(--cb-faint); }
 .cb-notice-title { margin-top: 16px; flex: 1; font-size: 18px; font-weight: 800; line-height: 1.45; letter-spacing: -.02em; text-wrap: pretty; }
 .cb-notice-more { margin-top: 18px; font-size: 13.5px; font-weight: 700; color: var(--cb-primary); }
-.cb-quick { background: var(--cb-paper); border-top: 1px solid rgba(168,19,74,.10); border-bottom: 1px solid rgba(168,19,74,.10); }
+.cb-quick { background: linear-gradient(180deg, #fff 0%, var(--cb-paper) 38%, #FBEFF3 100%); border-top: 1px solid rgba(168,19,74,.10); }
 .cb-quick .cb-wrap { padding-top: 84px; padding-bottom: 84px; }
 .cb-quick .cb-lead { margin: 0; max-width: 420px; font-size: 16px; line-height: 1.75; color: #6B6165; }
 .cb-quick-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 40px; }

@@ -151,7 +151,7 @@
       if (/notion-header-block/.test(cls)) { mode = /NOTICE|공지/i.test(t) ? 'notice' : ''; group = ''; return; }
       if (mode !== 'notice') return;
       if (/notion-sub_header-block|notion-sub_sub_header-block|notion-header_4-block/.test(cls)) { group = t.replace(/^[^\w가-힣]+/, ''); return; }
-      if (/notion-divider-block/.test(cls)) return;
+      if (/notion-divider-block/.test(cls)) { group = ''; return; } // 구분선에서 절을 닫는다 — 뒤에 붙는 하위 페이지 블록이 앞 절(회사소개)로 새지 않게.
       var a = blk.querySelector('a[href]');
       // 하위 페이지 블록은 「회사소개」 절 안의 것만 담는다 — 홈 하위에 새 페이지를 만들면 본문 끝에 블록이 붙는데, 그것까지 회사소개 링크로 새는 것을 막는다.
       if (/notion-page-block/.test(cls) && a) { if (/회사소개/.test(group)) out.about.push({ title: t, href: abs(a.getAttribute('href')) }); return; }

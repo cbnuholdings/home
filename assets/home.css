@@ -287,6 +287,5 @@ html.cbnu-oopy .notion-divider-block > div { border-color: rgba(23,18,20,.08) !i
 /* 9-6. 컬렉션 카드(자회사 DB 갤러리를 본문에 붙일 경우) */
 html.cbnu-oopy .notion-collection-item > div[role="button"] { border-radius: 18px !important; box-shadow: 0 0 0 1px rgba(23,18,20,.08) !important; transition: transform .38s var(--cb-ease), box-shadow .38s !important; }
 html.cbnu-oopy .notion-collection-item > div[role="button"]:hover { transform: translateY(-6px); box-shadow: 0 0 0 1px rgba(168,19,74,.3), 0 26px 54px rgba(23,18,20,.12) !important; }
-/* 9-7. 기존 미팅예약 고정 CTA (노션 코드블록에 있던 .cta — 유지·다듬기) */
-html.cbnu-oopy .cta { position: fixed; bottom: 30px; left: 0; right: 0; margin: 0 auto; display: flex; align-items: center; justify-content: center; width: 88%; max-width: 420px; height: 56px; background: var(--cb-primary); color: #fff; z-index: 999999999; text-decoration: none; border-radius: 999px; font-weight: 700; font-size: 17px; letter-spacing: -.01em; font-family: 'Pretendard', sans-serif; cursor: pointer; box-shadow: 0 12px 30px rgba(168,19,74,.34); transition: transform .28s var(--cb-ease), box-shadow .28s, filter .28s; }
-html.cbnu-oopy .cta:hover { transform: translateY(-3px); filter: brightness(94%); box-shadow: 0 20px 42px rgba(168,19,74,.44); }
+/* 9-7. 하단 고정 CTA(.cta)는 2026-08-15 민부장 지시로 제거 — 남아 있어도 화면에 안 뜨게 */
+html.cbnu-oopy .cta { display: none !important; }

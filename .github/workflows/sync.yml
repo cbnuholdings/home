@@ -23,7 +23,7 @@ jobs:
         run: python scripts/sync_subsidiaries.py
       - name: Sync notices (Notion home NOTICE via oopy SSR)
         env:
-          NOTICE_SRC: https://www.cbnuholdings.com/3bdfc8d8-805b-81ee-8f1b-e2d2cc7b0a9d   # 홈 적용 후 https://www.cbnuholdings.com/ 로 변경
+          NOTICE_SRC: https://www.cbnuholdings.com/
         run: python scripts/sync_notices.py || echo "notices sync skipped"
       - name: Commit if changed
         run: |

@@ -153,7 +153,8 @@
       if (/notion-sub_header-block|notion-sub_sub_header-block|notion-header_4-block/.test(cls)) { group = t.replace(/^[^\w가-힣]+/, ''); return; }
       if (/notion-divider-block/.test(cls)) return;
       var a = blk.querySelector('a[href]');
-      if (/notion-page-block/.test(cls) && a) { out.about.push({ title: t, href: abs(a.getAttribute('href')) }); return; }
+      // 하위 페이지 블록은 「회사소개」 절 안의 것만 담는다 — 홈 하위에 새 페이지를 만들면 본문 끝에 블록이 붙는데, 그것까지 회사소개 링크로 새는 것을 막는다.
+      if (/notion-page-block/.test(cls) && a) { if (/회사소개/.test(group)) out.about.push({ title: t, href: abs(a.getAttribute('href')) }); return; }
       if (!/notion-bulleted_list-block|notion-numbered_list-block|notion-text-block/.test(cls) || !a) return;
       var href = abs(a.getAttribute('href'));
       var body = t.replace(/^[•·\-\s]+/, '');

@@ -1,0 +1,294 @@
+{
+ "source": "https://www.cbnuholdings.com/portfolio",
+ "count": 23,
+ "items": [
+  {
+   "id": "381fc8d8-805b-807b-b0aa-f90146dd8149",
+   "name": "비앤비",
+   "ceo": "양범희",
+   "desc": "MPO 바이오마커 기반 기관지확장증 진단키트 개발",
+   "site": "",
+   "tags": [
+    "의료"
+   ],
+   "cat": "bio",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3Aec7b9ce0-7a25-424e-b5a9-7e4b55e8df21%3A%28%EC%A3%BC%29_%EB%B9%84%EC%95%A4%EB%B9%84_-_%EA%B0%80%EB%A1%9C%ED%98%95_%EB%A1%9C%EA%B3%A0.png&blockId=381fc8d8-805b-807b-b0aa-f90146dd8149&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-8050-b9cb-dceb9cee123c",
+   "name": "비즈에이앤씨",
+   "ceo": "박춘식",
+   "desc": "레미콘·콘크리트 산업에 특화된 ERP 및 스마트 공장 자동화 시스템",
+   "site": "http://ebizkorea.xyz/",
+   "tags": [
+    "ICT/AI"
+   ],
+   "cat": "ict",
+   "logo": "",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-803e-8882-c03d9d93428d",
+   "name": "샘물터",
+   "ceo": "윤필선",
+   "desc": "IoT 기반 스마트 수질 모니터링 및 물 관리 솔루션",
+   "site": "https://saemmulter.com/",
+   "tags": [
+    "ICT/AI"
+   ],
+   "cat": "ict",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fsaemmulter.com%2Fimages%2Flogo.svg&blockId=381fc8d8-805b-803e-8882-c03d9d93428d&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-807a-94ba-e4b865a02245",
+   "name": "씨엠피",
+   "ceo": "최철민",
+   "desc": "",
+   "site": "",
+   "tags": [],
+   "cat": "etc",
+   "logo": "",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-808f-ae4d-f7222af58d05",
+   "name": "에스엔피랩",
+   "ceo": "김태윤",
+   "desc": "이차전지 음극소재순수 실리콘 나노분말",
+   "site": "",
+   "tags": [
+    "소재/부품"
+   ],
+   "cat": "mat",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3Ab72a4d49-a4ae-4c1f-8c5e-c13642796b19%3A%EC%97%90%EC%8A%A4%EC%97%94%ED%94%BC%EB%9E%A9_%EB%A1%9C%EA%B3%A0.jpg&blockId=381fc8d8-805b-808f-ae4d-f7222af58d05&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-8082-97f8-c0ddfbc510fd",
+   "name": "에이브이지니어스",
+   "ceo": "기석철",
+   "desc": "자율주행/지능형 시스템 기업",
+   "site": "http://avgenius.kr/",
+   "tags": [
+    "모빌리티/자동차",
+    "ICT/AI"
+   ],
+   "cat": "ict",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3Aab140975-cafa-4568-9ef4-6b66fe6a4a17%3A%ED%9A%8C%EC%82%AC%EB%A1%9C%EA%B3%A0%28AV%EC%A7%80%EB%8B%88%EC%96%B4%EC%8A%A4%29.jpg&blockId=381fc8d8-805b-8082-97f8-c0ddfbc510fd&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-80e2-ab03-c1e38f90e717",
+   "name": "에이엑스바이오",
+   "ceo": "박준석",
+   "desc": "",
+   "site": "",
+   "tags": [],
+   "cat": "etc",
+   "logo": "",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-8055-955d-ca3ff9a07b75",
+   "name": "에이치에스뉴바이오",
+   "ceo": "김광규",
+   "desc": "",
+   "site": "",
+   "tags": [
+    "바이오",
+    "의료"
+   ],
+   "cat": "bio",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A1e7ea568-8a05-4ba1-bb26-6fba1c006d3d%3A%EB%A1%9C%EA%B3%A0.png&blockId=381fc8d8-805b-8055-955d-ca3ff9a07b75&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-8009-b329-ec3cbb4f7412",
+   "name": "엔조이라이프",
+   "ceo": "우지현",
+   "desc": "",
+   "site": "",
+   "tags": [],
+   "cat": "etc",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A7a41966a-9be1-4084-be69-540d092ef4be%3A%EC%97%94%EC%A1%B0%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%94%84_%EB%A1%9C%EA%B3%A0.jpg&blockId=381fc8d8-805b-8009-b329-ec3cbb4f7412&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-80c4-829c-f0bf032a3952",
+   "name": "와이케이신터링",
+   "ceo": "배온유",
+   "desc": "분말야금을 활용한 맞춤형 소결품 및 자동화 설비 부품",
+   "site": "http://yksintering.co.kr/",
+   "tags": [
+    "소재/부품"
+   ],
+   "cat": "mat",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A72f0cdae-fbea-478c-a569-3b22a7bf2d33%3A%EC%99%80%EC%9D%B4%EC%BC%80%EC%9D%B4%EC%8B%A0%ED%84%B0%EB%A7%81.jpg&blockId=381fc8d8-805b-80c4-829c-f0bf032a3952&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-8074-9652-c25d7d05bc6b",
+   "name": "우리들녘식품",
+   "ceo": "이준호",
+   "desc": "로컬 농식품(로컬푸드) 제조·유통 기업",
+   "site": "https://smartstore.naver.com/mlocalfood",
+   "tags": [],
+   "cat": "etc",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A2f31ab11-c9b8-49ef-854b-07678540784f%3A%EC%9A%B0%EB%A6%AC%EB%93%A4%EB%85%98_%EB%A1%9C%EA%B3%A0%EC%8B%9C%EC%95%88.jpg&blockId=381fc8d8-805b-8074-9652-c25d7d05bc6b&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-80c0-a0d8-c8359d5b6d54",
+   "name": "웰그린",
+   "ceo": "백기엽",
+   "desc": "산삼 배양근 바이오소재 기업",
+   "site": "http://well-green.net/",
+   "tags": [
+    "바이오"
+   ],
+   "cat": "bio",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3Abed7492b-fe4a-4259-931d-7ab14f4879a4%3A1._%ED%9A%8C%EC%82%AC%EB%A1%9C%EA%B3%A0_%E3%88%9C%EC%9B%B0%EA%B7%B8%EB%A6%B0_CI_%EC%B5%9C%EC%A2%85jpg_-_%EB%B3%B5%EC%82%AC%EB%B3%B8.jpg&blockId=381fc8d8-805b-80c0-a0d8-c8359d5b6d54&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-8026-bb3b-e8258bd9d57a",
+   "name": "유비콤",
+   "ceo": "박경화",
+   "desc": "무선원격검침(AMI) 기반 IoT 검침·전력제어 솔루션 기업",
+   "site": "http://www.youbicom.com/",
+   "tags": [
+    "ICT/AI"
+   ],
+   "cat": "ict",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3Ad40a17b0-d5ce-47df-9eb7-14a8f6dc74d2%3A%EC%9C%A0%EB%B9%84%EC%BD%A4%EB%A1%9C%EA%B3%A0.png&blockId=381fc8d8-805b-8026-bb3b-e8258bd9d57a&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-809d-9f9a-e71f9e1f4b79",
+   "name": "이듬",
+   "ceo": "김진영",
+   "desc": "",
+   "site": "",
+   "tags": [
+    "ICT/AI"
+   ],
+   "cat": "ict",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A940a38aa-c548-4002-8cf2-d5ec8b497a73%3A%EC%9D%B4%EB%93%AC_%EB%A1%9C%EA%B3%A0_%28%EC%B5%9C%EC%A0%81%ED%99%94%29.png&blockId=381fc8d8-805b-809d-9f9a-e71f9e1f4b79&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-8059-a10b-fcfc6b9d03d9",
+   "name": "이상기술",
+   "ceo": "김성태",
+   "desc": "IoT, ICT 기반의 교통안전 시스템 및 스마트 재난 대비 공공시설물 개발",
+   "site": "",
+   "tags": [
+    "ICT/AI"
+   ],
+   "cat": "ict",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A4424519f-f8b5-4767-b2f6-3653ff706f4b%3A%EC%9D%B4%EC%83%81%EA%B8%B0%EC%88%A0_%EB%A1%9C%EA%B3%A0.jpg&blockId=381fc8d8-805b-8059-a10b-fcfc6b9d03d9&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-80ec-bc5d-cb72eacb6537",
+   "name": "제로원",
+   "ceo": "조세원",
+   "desc": "AI·데이터 기반의 식품 폐기물 감량 및 자원 순환 솔루션",
+   "site": "https://zero1ne.com/",
+   "tags": [
+    "에너지/환경"
+   ],
+   "cat": "env",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fzero1ne.com%2Fimages%2FDAFhider8wvkyIj6iNW28VMm0.png&blockId=381fc8d8-805b-80ec-bc5d-cb72eacb6537&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-8062-967c-d13aa48bcd67",
+   "name": "제오시스",
+   "ceo": "송재오",
+   "desc": "ICT/AI 기반 솔루션·플랫폼 기업",
+   "site": "https://zeosis.com/",
+   "tags": [
+    "ICT/AI"
+   ],
+   "cat": "ict",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A5e5f93d8-0832-4e48-96a9-75ade155c9da%3A%EC%A0%9C%EC%98%A4%EC%8B%9C%EC%8A%A4CI-%EA%B3%BD%ED%95%9C%EA%B2%BD-210125.png&blockId=381fc8d8-805b-8062-967c-d13aa48bcd67&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-80ab-83c0-c1d0349f8ee4",
+   "name": "제이티에코비즈",
+   "ceo": "김정태",
+   "desc": "폐플라스틱 고속·고품위 선별 및 재활용 시스템 기술",
+   "site": "",
+   "tags": [
+    "에너지/환경"
+   ],
+   "cat": "env",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A046da6b3-f82c-4ced-b09e-aea318865b17%3A%EC%A0%9C%EC%9D%B4%ED%8B%B0%EC%97%90%EC%BD%94%EB%B9%84%EC%A6%88_%EB%A1%9C%EA%B3%A0.png&blockId=381fc8d8-805b-80ab-83c0-c1d0349f8ee4&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-802e-aab2-fd566fb7db10",
+   "name": "케이앤솔루션",
+   "ceo": "박대용",
+   "desc": "건물 에너지 시뮬레이션 기반 환경·에너지 솔루션",
+   "site": "https://changhomart.com/",
+   "tags": [
+    "에너지/환경"
+   ],
+   "cat": "env",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A4ab01553-fac5-49a4-93cf-bd89b725abbc%3A%EC%BC%80%EC%9D%B4%EC%95%A4%EC%86%94%EB%A3%A8%EC%85%98_%EB%A1%9C%EA%B3%A0.png&blockId=381fc8d8-805b-802e-aab2-fd566fb7db10&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-807a-b675-d9fb48196e78",
+   "name": "케이에스씨",
+   "ceo": "권혜정",
+   "desc": "배전반 및 전기 자동제어반 제조업",
+   "site": "",
+   "tags": [],
+   "cat": "etc",
+   "logo": "",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-807e-acd1-ef9356d50a45",
+   "name": "코넥트",
+   "ceo": "김대인",
+   "desc": "솔루션/SI/ERP/CRM",
+   "site": "",
+   "tags": [],
+   "cat": "etc",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3Aa0250982-0c6d-40d3-88b7-be84414b93ba%3Aconect_logo_png.png&blockId=381fc8d8-805b-807e-acd1-ef9356d50a45&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-809a-9499-c6f5c25f5f93",
+   "name": "테라셀바이오앤사이언스",
+   "ceo": "최경철",
+   "desc": "바이오 소재·의약/진단 분야 기술기업",
+   "site": "",
+   "tags": [
+    "바이오"
+   ],
+   "cat": "bio",
+   "logo": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A33060f3d-5c20-4f82-84f2-8becca03d93f%3A%ED%85%8C%EB%9D%BC%EC%85%80%ED%8C%8C%EC%9D%B4%EC%98%A4%EC%95%A4%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4.png&blockId=381fc8d8-805b-809a-9499-c6f5c25f5f93&width=1024",
+   "order": null
+  },
+  {
+   "id": "381fc8d8-805b-80bb-a33d-ef754137edcd",
+   "name": "티앤씨홀딩스",
+   "ceo": "유현수",
+   "desc": "무인 항공기 및 무인 비행장치 제조업",
+   "site": "",
+   "tags": [],
+   "cat": "etc",
+   "logo": "",
+   "order": null
+  }
+ ],
+ "synced_at": "2026-08-15T06:58:47Z"
+}

@@ -31,11 +31,11 @@
         { name: '성장관리 플랫폼', note: '지표·마일스톤 상시 관리', href: 'https://growth-platform.cbnuholdings.com' },
         { name: '창업기업 경영진단', note: '재무·경영 진단 리포트', href: 'https://fia.cbnuholdings.com' }
       ] },
-    { id: 'hub-project', num: '03', label: 'Project', ko: '지원사업',
+    { id: 'hub-project', num: '03', label: 'Program', ko: '지원사업',
       desc: '모집 중인 지원사업과 제작 지원 프로그램을 한 곳에서 확인하세요.',
       items: [
-        { name: '지원사업 공지사항', note: '모집 공고 · 접수 일정', href: 'https://www.cbnuholdings.com/fa30f3e8-43c9-4100-ba35-e6ece607e753' },
-        { name: 'MVP 제작 지원', note: '시제품 제작 신청', href: 'https://mvp.cbnuholdings.com/' }
+        { name: 'MVP 제작 지원', note: '시제품 제작 신청', href: 'https://mvp.cbnuholdings.com/' },
+        { name: 'CBNU-LIPS', note: 'LIPS 추천권 운영관리', href: 'https://lips-ops.cbnuholdings.com' }
       ] }
   ];
   var CATS = [
@@ -108,7 +108,7 @@
   function servicesHTML() {
     return '<section class="cb-services" id="services" aria-labelledby="cb-services-h"><div class="cb-wrap">' +
       '<div class="cb-head" data-reveal><div><div class="cb-eyebrow">SERVICES</div><h2 class="cb-h2" id="cb-services-h">성장지원 서비스</h2></div>' +
-      '<p class="cb-lead">Portfolio · Growth Hub · Project — 운영 중인 플랫폼으로 바로 연결됩니다.</p></div>' +
+      '<p class="cb-lead">Portfolio · Growth Hub · Program — 운영 중인 플랫폼으로 바로 연결됩니다.</p></div>' +
       '<div class="cb-hubs" data-reveal>' + HUBS.map(function (h) {
         return '<div class="cb-hub" id="' + h.id + '">' +
           '<div class="cb-hub-top"><span class="cb-hub-num">' + h.num + '</span><div><div class="cb-hub-label">' + esc(h.label) + '</div><div class="cb-hub-ko">' + esc(h.ko) + '</div></div></div>' +

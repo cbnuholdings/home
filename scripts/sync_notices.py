@@ -80,7 +80,7 @@ def parse(html):
             out["about"].append({"title": text, "href": link}); continue
         dm = re.search(r"\((\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})\)\s*$", text)
         date = f"{dm.group(1)}-{int(dm.group(2)):02d}-{int(dm.group(3)):02d}" if dm else ""
-        title = mtitle or (text[:dm.start()].strip() if dm else text)
+        title = mtitle or (text[:dm.start()].strip() if dm else text) or group  # 멘션 페이지가 SSR에 없으면 그룹명(예: 자료실)으로
         if title:
             out["items"].append({"group": group or "공지", "title": title, "href": link, "date": date})
     return out
@@ -92,7 +92,7 @@ def main():
         print("[ABORT] 공지 0건 — 기존 파일 유지"); return 1
     prev = json.load(open(OUT, encoding="utf-8")) if os.path.exists(OUT) else None
     payload = {"source": SRC, "count": len(data["items"]), **data}
-    if prev and all(prev.get(k) == payload[k] for k in ("items", "quick", "about")):
+    if prev and all(prev.get(k) == payload[k] for k in ("items", "quick", "about", "source")):
         print(f"[OK] 변경 없음 ({len(data['items'])}건)"); return 0
     payload["synced_at"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     if check:

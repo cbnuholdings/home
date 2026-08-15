@@ -1,6 +1,6 @@
 {
- "source": "https://www.cbnuholdings.com/3bdfc8d8-805b-81ee-8f1b-e2d2cc7b0a9d",
- "count": 7,
+ "source": "https://www.cbnuholdings.com/",
+ "count": 8,
  "items": [
   {
    "group": "공지사항",
@@ -43,6 +43,12 @@
    "title": "(모집 마감) 2026 충북청주강소특구 이노테크 창업 참여기업 모집 안내",
    "href": "https://www.cbnuholdings.com/2f46f2d8-9509-4802-8eb4-0ad33af4685d",
    "date": "2026-06-08"
+  },
+  {
+   "group": "자료실",
+   "title": "자료실",
+   "href": "https://www.cbnuholdings.com/962e3480-46fc-4235-978b-d1c12cbb8cf8",
+   "date": ""
   }
  ],
  "quick": [
@@ -81,5 +87,5 @@
    "href": "https://www.cbnuholdings.com/3bdfc8d8-805b-819e-86ff-cd0caae8359d"
   }
  ],
- "synced_at": "2026-08-15T07:44:27Z"
+ "synced_at": "2026-08-15T08:05:20Z"
 }

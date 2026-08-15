@@ -49,6 +49,10 @@
     portfolio: 'https://www.cbnuholdings.com/portfolio',
     notices: 'https://www.cbnuholdings.com/fa30f3e8-43c9-4100-ba35-e6ece607e753',
     admin: 'https://www.cbnuholdings.com/admin',
+    // C-TOM(연구자·공급측) / C-TOM-D(기업·수요측 `/market`) — 2026-08-15 라이브. 정식 기술이전 신청·계약은 산단 T-Market(아웃링크 · C-TOM-D 정본 §Ⅺ-3-1)
+    ctomMarket: 'https://ctom.cbnuholdings.com/market',
+    ctom: 'https://ctom.cbnuholdings.com/',
+    tmarket: 'https://tmarket.cbnu.ac.kr/jobedu/category.do?key=2009172181368&goMain=Y',
     privacy: 'https://www.cbnuholdings.com/380fc8d8-805b-8012-bfc4-ce8a82439721',
     noEmail: 'https://www.cbnuholdings.com/380fc8d8-805b-809b-9bec-c89c3cffaefa'
   };
@@ -236,9 +240,12 @@
     return '<div id="cbnu-home-tail">' +
       '<section class="cb-contact" id="contact" aria-labelledby="cb-contact-h"><div class="cb-contact-glow"></div><div class="cb-wrap" data-reveal>' +
         '<h2 id="cb-contact-h">공공기술이전 사업화 문의</h2>' +
-        '<p class="cb-sub">대학·공공연구기관 기술의 이전과 사업화를 상담합니다. 아래 두 서비스는 오픈 준비 중입니다.</p>' +
-        '<div class="cb-contact-btns"><span class="cb-soon a">기술이전 문의하기<em>준비 중</em></span><span class="cb-soon b">연구자 기술사업화<em>준비 중</em></span></div>' +
-        '<p class="cb-note">오픈 전까지는 <a href="' + LINKS.booking + '" target="_blank" rel="noopener">미팅·상담 예약</a>으로 문의해 주세요.' +
+        '<p class="cb-sub">대학·공공연구기관 기술의 이전과 사업화를 상담합니다. 기업은 학내 특허를 찾아 기술 상담을 신청하고, 연구자는 보유 특허의 활용성을 검토합니다.</p>' +
+        '<div class="cb-contact-btns">' +
+          '<a class="cb-btn cb-btn-primary" href="' + LINKS.ctomMarket + '" target="_blank" rel="noopener">기술이전 문의하기 <span>→</span></a>' +
+          '<a class="cb-btn cb-btn-ghost" href="' + LINKS.ctom + '" target="_blank" rel="noopener">연구자 기술사업화 <span>→</span></a>' +
+        '</div>' +
+        '<p class="cb-note">정식 기술이전 신청·계약은 <a href="' + LINKS.tmarket + '" target="_blank" rel="noopener">충북대학교 산학협력단 T-Market</a>에서 진행됩니다 · 일정 협의는 <a href="' + LINKS.booking + '" target="_blank" rel="noopener">미팅·상담 예약</a>' +
           (NOTICE.about && NOTICE.about.length ? '<br><span class="cb-note-links">' + aboutLinksHTML(NOTICE.about) + '</span>' : '') + '</p>' +
       '</div></section>' +
       (withFooter ? '<footer class="cb-footer"><div class="cb-wrap">' +

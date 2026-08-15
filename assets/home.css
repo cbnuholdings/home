@@ -207,6 +207,8 @@
 .cb-soon.a { background: rgba(168,19,74,.32); border: 1px solid rgba(168,19,74,.5); color: rgba(255,255,255,.62); }
 .cb-soon.b { border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.55); }
 .cb-soon em { font-style: normal; padding: 4px 9px; border-radius: 999px; background: rgba(255,255,255,.14); font-size: 11.5px; font-weight: 800; letter-spacing: .04em; }
+.cb-contact .cb-btn-ghost { border-color: rgba(255,255,255,.35); color: #fff !important; }
+.cb-contact .cb-btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.7); transform: translateY(-3px); }
 .cb-contact .cb-note { margin: 26px 0 0; font-size: 15px; color: rgba(255,255,255,.5); }
 .cb-contact .cb-note a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
 .cb-footer { background: #0F0B0D; color: rgba(255,255,255,.5); padding: 40px 0; }

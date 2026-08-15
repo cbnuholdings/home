@@ -193,6 +193,8 @@
   }
   function quickIcon(q) {
     var t = (q.label || '') + ' ' + (q.href || '');
+    if (/자회사.*신청|subsidiary\.cbnuholdings/i.test(t)) return '🏢';
+    if (/자회사|portfolio/i.test(t)) return '💼';
     if (/카카오|kakao/i.test(t)) return '💬';
     if (/mail|이메일|메일/i.test(t)) return '✉️';
     if (/기술마켓|tmarket|기술이전/i.test(t)) return '🔬';
@@ -203,6 +205,8 @@
   }
   function quickDesc(q) {
     var t = (q.label || '') + ' ' + (q.href || '');
+    if (/자회사.*신청|subsidiary\.cbnuholdings/i.test(t)) return '기술출자 자회사 편입·설립 온라인 접수';
+    if (/자회사.*현황|\/portfolio/i.test(t)) return '자회사 포트폴리오 전체 보기';
     if (/카카오|kakao/i.test(t)) return '카카오톡으로 문의·소식 받기';
     if (/mail|이메일|메일/i.test(t)) return quickSub(q);
     if (/기술마켓|tmarket/i.test(t)) return '충북대 보유기술 검색·기술이전';

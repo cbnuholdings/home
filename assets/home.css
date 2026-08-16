@@ -119,10 +119,11 @@
 .cb-news { background: #fff; }
 .cb-news > .cb-wrap { padding-top: 96px; padding-bottom: 88px; }
 .cb-news .cb-more { font-size: 15px; font-weight: 700; }
-/* 공지 전체 보기 — 헤더 우측 토글 + 분류칩·검색 (전체 보기를 열었을 때만 노출) */
+/* 공지 = 분류 탭 상시 노출(공지사항·사업공고·자료실) + 헤더 우측 「전체 보기」 토글 + 탭 내 검색 */
 .cb-more-all { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; font-family: inherit; color: var(--cb-primary); cursor: pointer; }
 .cb-more-all:hover { text-decoration: underline; }
-.cb-notice-tools { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(23,18,20,.08); }
+.cb-more-all[hidden] { display: none; } /* display:inline-flex 가 hidden 속성을 덮으므로 명시 */
+.cb-notice-tools { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(23,18,20,.08); }
 .cb-notice-tools[hidden] { display: none; }
 .cb-notice-tools:not([hidden]) + .cb-notices { margin-top: 24px; }
 .cb-chips { display: flex; flex-wrap: wrap; gap: 8px; }

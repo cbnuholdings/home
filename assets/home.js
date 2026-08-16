@@ -176,12 +176,13 @@
     });
     return out;
   }
+  // 노션 NOTICE 소제목(### 공지사항/사업공고/자료실)이 정본. /사업/·/자료/ 부분일치라 「사업공지」로 써 있어도 잡힌다.
   function noticeTag(n) {
-    return /사업/.test(n.group) ? '사업공지' : /자료/.test(n.group) ? '자료실' : (n.group || '공지');
+    return /사업/.test(n.group) ? '사업공고' : /자료/.test(n.group) ? '자료실' : (n.group || '공지');
   }
-  // 카드 태그와 같은 규칙으로 분류칩을 만든다 — 둘이 갈리면 필터가 0건을 낸다
+  // 카드 태그와 같은 규칙으로 분류 탭을 만든다 — 둘이 갈리면 필터가 0건을 낸다
   function noticeCats(items) {
-    var order = ['공지사항', '사업공지', '자료실'], out = [];
+    var order = ['공지사항', '사업공고', '자료실'], out = [];
     items.forEach(function (n) { var t = noticeTag(n); if (out.indexOf(t) < 0) out.push(t); });
     return out.sort(function (a, b) {
       var ia = order.indexOf(a), ib = order.indexOf(b);
@@ -197,22 +198,27 @@
       '<div class="cb-notice-more">자세히 보기 →</div></a>';
   }
   function sortedNotices(data) { return (data.items || []).slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); }); }
-  var LIMITN = 9; // 공지 카드 기본 노출(3열×3행) — 넘으면 「더 보기」
+  var LIMITN = 6; // 분류 탭별 기본 노출(3열×2행) — 넘으면 「더 보기」
+  function inCat(items, cat) {
+    return items.filter(function (n) { return noticeTag(n) === cat; });
+  }
   function noticeHTML(data) {
-    var items = sortedNotices(data), shown = items.slice(0, LIMITN);
+    var items = sortedNotices(data);
     var quick = data.quick || [];
-    var cats = ['전체'].concat(noticeCats(items));
+    var cats = noticeCats(items);            // 데이터에 있는 분류만 탭이 된다(빈 분류는 탭도 없음)
+    var first = cats[0] || '';
+    var mine = inCat(items, first), shown = mine.slice(0, LIMITN);
     return '<section class="cb-news" id="news" aria-labelledby="cb-news-h"><div class="cb-wrap">' +
       '<div class="cb-head" data-reveal><div><div class="cb-eyebrow">NOTICE</div><h2 class="cb-h2" id="cb-news-h">공지사항</h2></div>' +
-        (items.length ? '<button type="button" class="cb-more cb-more-all" data-notice-all aria-expanded="false" aria-controls="cb-notice-list">공지사항 전체 보기 (' + items.length + ') <span>→</span></button>' : '') + '</div>' +
-      '<div class="cb-notice-tools" data-notice-tools hidden>' +
+        '<button type="button" class="cb-more cb-more-all" data-notice-all aria-expanded="false" aria-controls="cb-notice-list"' + (mine.length > LIMITN ? '' : ' hidden') + '>' + esc(first) + ' 전체 보기 (' + mine.length + ') <span>→</span></button></div>' +
+      (cats.length ? '<div class="cb-notice-tools" data-notice-tools>' +
         '<div class="cb-chips" role="group" aria-label="공지 분류">' + cats.map(function (c, i) {
           return '<button type="button" class="cb-chip' + (i === 0 ? ' is-on' : '') + '" data-notice-cat="' + esc(c) + '" aria-pressed="' + (i === 0 ? 'true' : 'false') + '">' + esc(c) + '</button>';
         }).join('') + '</div>' +
-        '<label class="cb-notice-search"><span aria-hidden="true">🔍</span><input type="search" placeholder="공지 제목 검색" data-notice-q aria-label="공지 제목 검색"></label>' +
-      '</div>' +
+        '<label class="cb-notice-search"><span aria-hidden="true">🔍</span><input type="search" placeholder="제목 검색" data-notice-q aria-label="공지 제목 검색"></label>' +
+      '</div>' : '') +
       '<div class="cb-notices" id="cb-notice-list" data-reveal aria-live="polite">' + (shown.length ? shown.map(noticeCard).join('') : '<div class="cb-grid-empty">등록된 공지가 없습니다.</div>') + '</div>' +
-      (items.length > LIMITN ? '<div class="cb-more-wrap"><button type="button" class="cb-btn cb-btn-ghost cb-more-btn" data-notice-more>공지 ' + (items.length - LIMITN) + '건 더 보기 <span>↓</span></button></div>' : '') +
+      '<div class="cb-more-wrap">' + (mine.length > LIMITN ? '<button type="button" class="cb-btn cb-btn-ghost cb-more-btn" data-notice-more>' + (mine.length - LIMITN) + '건 더 보기 <span>↓</span></button>' : '') + '</div>' +
     '</div>' +
       (quick.length ? '<div class="cb-quick" id="quick"><div class="cb-wrap"><div class="cb-head" data-reveal><div><div class="cb-eyebrow">QUICK LINKS</div><h2 class="cb-h2">바로가기</h2></div><p class="cb-lead">자주 찾는 채널과 관련 기관으로 바로 이동합니다.</p></div><div class="cb-quick-grid" data-reveal>' + quick.map(function (q) {
         return '<a class="cb-quick-card" href="' + esc(q.href) + '" target="_blank" rel="noopener"><span class="cb-quick-ico">' + quickIcon(q) + '</span><span class="cb-quick-txt"><b>' + esc(q.label) + '</b><small>' + esc(quickDesc(q)) + '</small></span><span class="cb-quick-go">바로가기 <i>↗</i></span></a>'; }).join('') + '</div></div></div>' : '') +
@@ -248,55 +254,61 @@
     if (/^tel:/i.test(h)) return h.replace(/^tel:/i, '');
     var m = h.match(/^https?:\/\/([^\/?#]+)/i); return m ? m[1].replace(/^www\./, '') : '';
   }
-  // 공지 「전체 보기」 — 노션 본문에서 읽은 전 건을 분류·검색과 함께 이 자리에서 펼친다.
+  // 공지 = 분류 탭(공지사항·사업공고·자료실)으로 분리 운영한다. 한 번에 한 분류만 보이고,
+  // 「전체 보기」·「더 보기」·검색은 전부 지금 선택된 탭 안에서만 작동한다.
   // 별도 목록 페이지를 두지 않는 이유: 노션 홈 NOTICE 목록이 유일한 정본이고, 여기서 그리면 공지를 추가해도 자동으로 따라온다.
   function bindNotices(scope, data) {
     var box = scope.querySelector('.cb-notices'); if (!box) return;
     var items = sortedNotices(data);
+    var cats = noticeCats(items);
     var allBtn = scope.querySelector('[data-notice-all]');
-    var tools = scope.querySelector('[data-notice-tools]');
     var moreWrap = scope.querySelector('.cb-more-wrap');
-    var moreBtn = scope.querySelector('[data-notice-more]');
     var qEl = scope.querySelector('[data-notice-q]');
     var chips = Array.prototype.slice.call(scope.querySelectorAll('[data-notice-cat]'));
-    var open = false, cat = '전체', q = '';
+    var open = false, cat = cats[0] || '', q = '';
 
-    function visible() {
-      if (!open) return items.slice(0, LIMITN);
+    function visible(mine) {
       var kw = q.trim().toLowerCase();
-      return items.filter(function (n) {
-        if (cat !== '전체' && noticeTag(n) !== cat) return false;
-        return !kw || (n.title || '').toLowerCase().indexOf(kw) >= 0;
-      });
+      if (kw) return mine.filter(function (n) { return (n.title || '').toLowerCase().indexOf(kw) >= 0; }); // 검색은 그 탭 전 건 대상
+      return open ? mine : mine.slice(0, LIMITN);
     }
     function render() {
-      var list = visible();
+      var mine = inCat(items, cat), list = visible(mine);
       box.innerHTML = list.length ? list.map(noticeCard).join('')
-        : '<div class="cb-grid-empty">' + (open ? '조건에 맞는 공지가 없습니다.' : '등록된 공지가 없습니다.') + '</div>';
-      if (tools) tools.hidden = !open;
-      if (moreWrap) moreWrap.hidden = open;
+        : '<div class="cb-grid-empty">' + (q.trim() ? '조건에 맞는 공지가 없습니다.' : '등록된 ' + cat + ' 항목이 없습니다.') + '</div>';
       if (allBtn) {
+        // 한 화면에 다 들어가면(또는 검색 중이면) 눌러도 변화가 없는 버튼이 되므로 감춘다
+        allBtn.hidden = mine.length <= LIMITN || !!q.trim();
         allBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        allBtn.innerHTML = open ? '공지 접기 <span>↑</span>' : '공지사항 전체 보기 (' + items.length + ') <span>→</span>';
+        allBtn.innerHTML = open ? '접기 <span>↑</span>' : esc(cat) + ' 전체 보기 (' + mine.length + ') <span>→</span>';
       }
+      // 더 보기 버튼은 탭마다 건수가 달라 매번 다시 그린다(.cb-more-wrap:empty 가 스스로 숨는다)
+      if (moreWrap) moreWrap.innerHTML = (!open && mine.length > LIMITN)
+        ? '<button type="button" class="cb-btn cb-btn-ghost cb-more-btn" data-notice-more>' + (mine.length - LIMITN) + '건 더 보기 <span>↓</span></button>' : '';
     }
     function setCat(v) {
-      cat = v;
+      cat = v; open = false; q = ''; if (qEl) qEl.value = '';   // 탭을 바꾸면 펼침·검색을 초기화한다
       chips.forEach(function (c) {
         var on = c.getAttribute('data-notice-cat') === v;
         c.classList.toggle('is-on', on);
         c.setAttribute('aria-pressed', String(on));
       });
+      render();
     }
-    function openAll() { open = true; render(); }
-    function closeAll() { open = false; setCat('전체'); q = ''; if (qEl) qEl.value = ''; render(); }
 
-    if (allBtn) allBtn.addEventListener('click', function () { if (open) closeAll(); else openAll(); });
-    if (moreBtn) moreBtn.addEventListener('click', openAll); // 9건 초과 「더 보기」도 같은 전체 보기로 합류시킨다
+    if (allBtn) allBtn.addEventListener('click', function () {
+      open = !open;
+      if (!open) { q = ''; if (qEl) qEl.value = ''; }
+      render();
+    });
+    if (moreWrap) moreWrap.addEventListener('click', function (e) {  // 버튼이 매번 새로 그려지므로 위임
+      if (e.target.closest('[data-notice-more]')) { open = true; render(); }
+    });
     chips.forEach(function (c) {
-      c.addEventListener('click', function () { setCat(c.getAttribute('data-notice-cat')); render(); });
+      c.addEventListener('click', function () { setCat(c.getAttribute('data-notice-cat')); });
     });
     if (qEl) qEl.addEventListener('input', function () { q = qEl.value || ''; render(); });
+    render();
   }
   function aboutLinksHTML(about) {
     return (about || []).map(function (p) { return '<a href="' + esc(p.href) + '">' + esc(p.title) + '</a>'; }).join('');

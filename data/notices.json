@@ -1,6 +1,6 @@
 {
  "source": "https://www.cbnuholdings.com/",
- "count": 8,
+ "count": 9,
  "items": [
   {
    "group": "공지사항",
@@ -27,27 +27,33 @@
    "date": "2026-06-01"
   },
   {
-   "group": "사업공지",
+   "group": "사업공고",
    "title": "MVP 제작 지원 안내 (선정기업용)",
    "href": "https://www.cbnuholdings.com/18e66e6b-840d-4d37-85b0-3e274c992c3d",
    "date": "2026-07-20"
   },
   {
-   "group": "사업공지",
+   "group": "사업공고",
    "title": "2026 이노테크 창업지원사업 선정기업 - Kick-off",
    "href": "https://www.cbnuholdings.com/fa30f3e8-43c9-4100-ba35-e6ece607e753",
    "date": "2026-07-01"
   },
   {
-   "group": "사업공지",
+   "group": "사업공고",
    "title": "(모집 마감) 2026 충북청주강소특구 이노테크 창업 참여기업 모집 안내",
    "href": "https://www.cbnuholdings.com/2f46f2d8-9509-4802-8eb4-0ad33af4685d",
    "date": "2026-06-08"
   },
   {
    "group": "자료실",
-   "title": "자료실",
-   "href": "https://www.cbnuholdings.com/3bdfc8d8-805b-8127-b218-d595515c1847",
+   "title": "🧾연구소기업 제도의 세제 혜택 안내",
+   "href": "https://www.cbnuholdings.com/67c4d6b8-169f-48fd-9a30-a78a35d4438d",
+   "date": ""
+  },
+  {
+   "group": "자료실",
+   "title": "🧪연구소기업 R&D 지원사업 안내 (등록기업 대상)",
+   "href": "https://www.cbnuholdings.com/280b8c17-91aa-45b8-ab3f-945c75866599",
    "date": ""
   }
  ],
@@ -95,5 +101,5 @@
    "href": "https://www.cbnuholdings.com/3bdfc8d8-805b-8127-b218-d595515c1847"
   }
  ],
- "synced_at": "2026-08-15T16:39:12Z"
+ "synced_at": "2026-08-16T05:41:37Z"
 }

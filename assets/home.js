@@ -30,7 +30,7 @@
       items: [
         { name: '성장관리 플랫폼', note: '지표·마일스톤 상시 관리', href: 'https://growth-platform.cbnuholdings.com' },
         { name: '창업기업 경영진단', note: '재무·경영 진단 리포트', href: 'https://fia.cbnuholdings.com' },
-        { name: 'R&D 기획지원', note: '정부 R&D 사업계획서 작성', href: 'https://rnd.cbnuholdings.com/' }
+        { name: 'R&D 기획지원', note: '정부 R&D 사업계획서 작성 · 준비 중', href: 'https://www.cbnuholdings.com/rnd' }
       ] },
     { id: 'hub-project', num: '03', label: 'Program', ko: '지원사업',
       desc: '모집 중인 지원사업과 제작 지원 프로그램을 한 곳에서 확인하세요.',

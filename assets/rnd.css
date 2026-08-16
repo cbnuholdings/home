@@ -1,0 +1,144 @@
+/* ============================================================
+   CBNU Tech Holdings — R&D 기획지원 안내 페이지 레이어 스타일
+   범위 규칙: 전부 #cbnu-rnd-admin 아래에만 건다. 노션 본문 스타일은 건드리지 않는다.
+   ============================================================ */
+
+#cbnu-rnd-admin {
+  --cb-primary: #A8134A;
+  --cb-deep: #6E0B2E;
+  --cb-ink: #171214;
+  --cb-body: #5B5155;
+  --cb-faint: #9A8E93;
+  --cb-line: rgba(23, 18, 20, .08);
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif;
+  max-width: 720px;
+  margin: 56px auto 72px;
+  padding: 0 24px;
+  color: var(--cb-ink);
+  line-height: 1.6;
+}
+
+#cbnu-rnd-admin .cbrnd-line {
+  height: 1px;
+  background: var(--cb-line);
+  margin-bottom: 14px;
+}
+
+#cbnu-rnd-admin .cbrnd-toggle {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  font: inherit;
+  font-size: 13px;
+  color: var(--cb-faint);
+  cursor: pointer;
+  letter-spacing: .01em;
+  transition: color .16s ease;
+}
+#cbnu-rnd-admin .cbrnd-toggle:hover,
+#cbnu-rnd-admin .cbrnd-toggle:focus-visible { color: var(--cb-body); }
+
+#cbnu-rnd-admin .cbrnd-panel {
+  margin-top: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--cb-line);
+  border-radius: 8px;
+  background: #fff;
+}
+#cbnu-rnd-admin .cbrnd-panel[hidden] { display: none; }
+
+#cbnu-rnd-admin .cbrnd-lead {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--cb-body);
+}
+
+#cbnu-rnd-admin .cbrnd-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#cbnu-rnd-admin .cbrnd-form[hidden] { display: none; }
+
+#cbnu-rnd-admin .cbrnd-code {
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--cb-ink);
+  background: #fff;
+  border: 1px solid rgba(23, 18, 20, .18);
+  border-radius: 6px;
+}
+#cbnu-rnd-admin .cbrnd-code:focus {
+  outline: none;
+  border-color: var(--cb-primary);
+  box-shadow: 0 0 0 3px rgba(168, 19, 74, .12);
+}
+
+#cbnu-rnd-admin .cbrnd-submit {
+  appearance: none;
+  padding: 9px 20px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--cb-primary);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .16s ease;
+}
+#cbnu-rnd-admin .cbrnd-submit:hover { background: var(--cb-deep); }
+
+#cbnu-rnd-admin .cbrnd-msg {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--cb-primary);
+  min-height: 1em;
+}
+#cbnu-rnd-admin .cbrnd-msg:empty { margin: 0; min-height: 0; }
+
+#cbnu-rnd-admin .cbrnd-open { margin-top: 2px; }
+
+#cbnu-rnd-admin .cbrnd-go {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--cb-primary);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background .16s ease;
+}
+#cbnu-rnd-admin .cbrnd-go:hover { background: var(--cb-deep); }
+#cbnu-rnd-admin .cbrnd-go span {
+  font-size: 12px;
+  font-weight: 400;
+  opacity: .8;
+}
+
+#cbnu-rnd-admin .cbrnd-note {
+  margin: 12px 0 0;
+  font-size: 12.5px;
+  color: var(--cb-body);
+}
+#cbnu-rnd-admin .cbrnd-note code {
+  padding: 1px 6px;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: rgba(23, 18, 20, .05);
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+@media (max-width: 640px) {
+  #cbnu-rnd-admin { margin: 40px auto 56px; padding: 0 16px; }
+  #cbnu-rnd-admin .cbrnd-submit { flex: 1 1 100%; }
+  #cbnu-rnd-admin .cbrnd-go { width: 100%; justify-content: center; flex-wrap: wrap; }
+}

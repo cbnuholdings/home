@@ -26,10 +26,11 @@
         { name: '자회사 편입·설립 신청', note: '온라인 접수', href: 'https://subsidiary.cbnuholdings.com/' }
       ] },
     { id: 'hub-growth', num: '02', label: 'Growth Hub', ko: '성장지원',
-      desc: '설립 이후가 진짜 시작입니다. 성장 관리와 경영 진단을 상시 운영합니다.',
+      desc: '설립 이후가 진짜 시작입니다. 성장 관리·경영 진단·R&D 기획을 상시 운영합니다.',
       items: [
         { name: '성장관리 플랫폼', note: '지표·마일스톤 상시 관리', href: 'https://growth-platform.cbnuholdings.com' },
-        { name: '창업기업 경영진단', note: '재무·경영 진단 리포트', href: 'https://fia.cbnuholdings.com' }
+        { name: '창업기업 경영진단', note: '재무·경영 진단 리포트', href: 'https://fia.cbnuholdings.com' },
+        { name: 'R&D 기획지원', note: '정부 R&D 사업계획서 작성', href: 'https://www.cbnuholdings.com/rnd' }
       ] },
     { id: 'hub-project', num: '03', label: 'Program', ko: '지원사업',
       desc: '모집 중인 지원사업과 제작 지원 프로그램을 한 곳에서 확인하세요.',

@@ -31,7 +31,7 @@
         { name: '성장관리 플랫폼', note: '지표·마일스톤 상시 관리', href: 'https://growth-platform.cbnuholdings.com' },
         { name: '창업기업 경영진단', note: '재무·경영 진단 리포트', href: 'https://fia.cbnuholdings.com' },
         // 2026-08-18 민부장 지시: Growth Hub의 「기술이전신청」 자리를 IR PitchBuilder로(oopy 상단 메뉴와 동일). 기술이전 문의는 히어로·문의 섹션(C-TOM)이 계속 맡는다.
-        { name: 'IR PitchBuilder', note: 'IR 작성·진단 도구 (접수번호·접속코드 필요)', href: 'https://cbnuholdings.github.io/pitchbuilder/' },
+        { name: 'IR PitchBuilder', note: 'IR 작성·진단 도구 (접수번호·접속코드 필요)', href: 'https://pitching.cbnuholdings.com/' },
         { name: 'R&D 기획지원', note: '정부 R&D 사업계획서 작성 · 준비 중', href: 'https://www.cbnuholdings.com/rnd' }
       ] },
     { id: 'hub-project', num: '03', label: 'Program', ko: '지원사업',

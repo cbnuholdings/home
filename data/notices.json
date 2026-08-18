@@ -1,7 +1,13 @@
 {
  "source": "https://www.cbnuholdings.com/",
- "count": 9,
+ "count": 10,
  "items": [
+  {
+   "group": "공지사항",
+   "title": "자회사 설립 통합관리 시스템 오픈 및 자회사 신청 모집 안내",
+   "href": "https://www.cbnuholdings.com/1fdee2c5-e0ad-41a8-a851-10d48972b647",
+   "date": "2026-08-18"
+  },
   {
    "group": "공지사항",
    "title": "[로우파트너스] 「2026년 웰컴 투 팁스 프로그램」1차 IR 피칭 참가기업 모집",
@@ -105,5 +111,5 @@
    "href": "https://www.cbnuholdings.com/3befc8d8-805b-81c2-8195-c517aa929f99"
   }
  ],
- "synced_at": "2026-08-16T08:45:48Z"
+ "synced_at": "2026-08-18T07:03:00Z"
 }

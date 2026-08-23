@@ -185,7 +185,7 @@
   }
   // 노션 「홈페이지 DB」의 분류 속성값은 oopy 공개 SSR(__NEXT_DATA__)에 그대로 실려 온다 — 추가 요청·토큰 0.
   // 🔴 속성 키(~kUU 등)는 속성을 지웠다 다시 만들면 바뀐다 → 키를 박지 말고 스키마에서 이름 「분류」로 역인출한다.
-  var CATMAP = null;
+  var CATMAP = null, CATCOLOR = {};
   function dbCatMap() {
     if (CATMAP) return CATMAP;
     CATMAP = {};
@@ -193,11 +193,16 @@
       var nd = window.__NEXT_DATA__;
       if (!nd) return CATMAP;
       var keys = {}, recs = [];
+      CATCOLOR = {};
       (function walk(o) {
         if (!o || typeof o !== 'object') return;
         for (var k in o) {
           var v = o[k];
-          if (v && typeof v === 'object' && !Array.isArray(v) && v.name === '분류' && v.type === 'select') keys[k] = 1;
+          if (v && typeof v === 'object' && !Array.isArray(v) && v.name === '분류' && v.type === 'select') {
+            keys[k] = 1;
+            // 옵션 색도 노션에서 그대로 가져온다 — 노션에서 색을 바꾸면 홈 태그도 따라온다
+            (v.options || []).forEach(function (op) { if (op && op.value) CATCOLOR[op.value] = op.color || 'default'; });
+          }
         }
         if (o.id && o.properties) recs.push(o);
         for (var p in o) walk(o[p]);
@@ -220,6 +225,12 @@
   function noticeLabel(n) {
     return dbCatMap()[pageId(n.href)] || noticeTag(n);
   }
+  // 태그 색 — 표기 이름으로 노션 옵션 색을 찾는다. DB 밖 항목(자료실 등)은 default.
+  // 🔴 id 가 아니라 「이름」으로 찾는 것이 중요하다: DB에 없는 사업공고 1건도 다른 사업공고와 같은 색이 된다.
+  function catColor(label) {
+    dbCatMap();
+    return CATCOLOR[label] || 'default';
+  }
   // 카드 태그와 같은 규칙으로 분류 탭을 만든다 — 둘이 갈리면 필터가 0건을 낸다
   function noticeCats(items) {
     var order = ['공지사항', '사업공고', '자료실'], out = [];
@@ -233,7 +244,7 @@
     var tag = noticeLabel(n);
     var d = n.date ? n.date.replace(/-/g, '.') : '';
     return '<a class="cb-notice" href="' + esc(n.href) + '" target="_blank" rel="noopener">' +
-      '<div class="cb-notice-meta"><span class="cb-tag">' + esc(tag) + '</span>' + (d ? '<span class="cb-date">' + esc(d) + '</span>' : '') + '</div>' +
+      '<div class="cb-notice-meta"><span class="cb-tag cb-tag--' + catColor(tag) + '">' + esc(tag) + '</span>' + (d ? '<span class="cb-date">' + esc(d) + '</span>' : '') + '</div>' +
       '<div class="cb-notice-title">' + esc(n.title) + '</div>' +
       '<div class="cb-notice-more">자세히 보기 →</div></a>';
   }

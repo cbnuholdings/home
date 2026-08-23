@@ -138,6 +138,18 @@
 .cb-notice:hover { transform: translateY(-6px); box-shadow: 0 22px 48px rgba(23,18,20,.09); background: var(--cb-paper); }
 .cb-notice-meta { display: flex; align-items: center; gap: 10px; }
 .cb-tag { display: inline-flex; padding: 5px 11px; border-radius: 6px; background: var(--cb-primary); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .04em; }
+/* 공지 태그 색 — 브랜드 단일 색(hsl 338°·명도 37%) 하나로 가고 채도만 단계로 내린다.
+   색상(hue)은 전부 같다. 클래스 이름은 노션 DB 「분류」 옵션 색이 주는 값이라, 노션에서 옵션 색을 바꾸면 톤 단계가 바뀐다.
+   글자색은 .cb-tag 기본값(#fff)을 그대로 쓴다 — 아래는 배경만 건드린다. */
+.cb-tag--red    { background: var(--cb-primary); }  /* 채도 80 — 가장 진함 */
+.cb-tag--orange { background: #9F1E4D; }            /* 68 */
+.cb-tag--pink   { background: #9B224E; }            /* 64 */
+.cb-tag--purple { background: #932A50; }            /* 56 */
+.cb-tag--green  { background: #8C3152; }            /* 48 */
+.cb-tag--blue   { background: #843954; }            /* 40 */
+.cb-tag--yellow { background: #7B4257; }            /* 30 */
+.cb-tag--brown  { background: #754858; }            /* 24 */
+.cb-tag--default, .cb-tag--gray { background: #6A535B; }  /* 12 — 가장 옅음 */
 .cb-date { font-size: 13px; font-weight: 600; color: var(--cb-faint); }
 .cb-notice-title { margin-top: 16px; flex: 1; font-size: 18px; font-weight: 800; line-height: 1.45; letter-spacing: -.02em; text-wrap: pretty; }
 .cb-notice-more { margin-top: 18px; font-size: 13.5px; font-weight: 700; color: var(--cb-primary); }

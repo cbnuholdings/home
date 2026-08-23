@@ -1,7 +1,13 @@
 {
  "source": "https://www.cbnuholdings.com/",
- "count": 10,
+ "count": 11,
  "items": [
+  {
+   "group": "공지사항",
+   "title": "충북 오픈이노베이션 벤처투자조합 결성총회 개최",
+   "href": "https://www.cbnuholdings.com/3c5fc8d8-805b-80e5-9acd-d3ced283fe5d",
+   "date": "2026-08-24"
+  },
   {
    "group": "공지사항",
    "title": "자회사 설립 통합관리 시스템 오픈 및 자회사 신청 모집 안내",
@@ -111,5 +117,5 @@
    "href": "https://www.cbnuholdings.com/3befc8d8-805b-81c2-8195-c517aa929f99"
   }
  ],
- "synced_at": "2026-08-18T07:03:00Z"
+ "synced_at": "2026-08-23T06:59:40Z"
 }

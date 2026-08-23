@@ -25,7 +25,7 @@
         { name: '자회사 현황', note: '포트폴리오 기업 전체 보기', href: 'https://www.cbnuholdings.com/portfolio' },
         { name: '자회사 편입·설립 신청', note: '온라인 접수', href: 'https://subsidiary.cbnuholdings.com/' },
         // 2026-08-23 민부장 지시: 자회사 현황 안에 업무관리시스템 진입점을 별도로 둔다(로그인 게이트 — 구성원 전용).
-        { name: '업무관리시스템', note: '자회사 업무 지시·진행·인수인계 관리 (구성원 로그인)', href: 'https://work.cbnuholdings.com/' }
+        { name: '업무관리시스템', note: '업무 지시·진행·인수인계 (구성원 로그인)', href: 'https://work.cbnuholdings.com/' }
       ] },
     { id: 'hub-growth', num: '02', label: 'Growth Hub', ko: '성장지원',
       desc: '설립 이후가 진짜 시작입니다. 성장 관리·경영 진단·IR 작성·R&D 기획을 상시 운영합니다.',

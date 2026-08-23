@@ -242,9 +242,13 @@
   }
   function noticeCard(n) {
     var tag = noticeLabel(n);
+    // 🔴 색 구분은 「공지사항」 탭 안에서만 쓴다 — 그 안의 공지사항·소식지·행사 등을 갈라 보이려는 것이다(2026-08-23 민부장 지시).
+    //    사업공고·자료실 탭은 탭 자체가 이미 구분이므로 예전 브랜드 원색(.cb-tag 기본)으로 둔다.
+    var tab = noticeTag(n);
+    var toned = (tab !== '사업공고' && tab !== '자료실');
     var d = n.date ? n.date.replace(/-/g, '.') : '';
     return '<a class="cb-notice" href="' + esc(n.href) + '" target="_blank" rel="noopener">' +
-      '<div class="cb-notice-meta"><span class="cb-tag cb-tag--' + catColor(tag) + '">' + esc(tag) + '</span>' + (d ? '<span class="cb-date">' + esc(d) + '</span>' : '') + '</div>' +
+      '<div class="cb-notice-meta"><span class="cb-tag' + (toned ? ' cb-tag--' + catColor(tag) : '') + '">' + esc(tag) + '</span>' + (d ? '<span class="cb-date">' + esc(d) + '</span>' : '') + '</div>' +
       '<div class="cb-notice-title">' + esc(n.title) + '</div>' +
       '<div class="cb-notice-more">자세히 보기 →</div></a>';
   }

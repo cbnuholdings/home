@@ -183,6 +183,43 @@
   function noticeTag(n) {
     return /사업/.test(n.group) ? '사업공고' : /자료/.test(n.group) ? '자료실' : (n.group || '공지');
   }
+  // 노션 「홈페이지 DB」의 분류 속성값은 oopy 공개 SSR(__NEXT_DATA__)에 그대로 실려 온다 — 추가 요청·토큰 0.
+  // 🔴 속성 키(~kUU 등)는 속성을 지웠다 다시 만들면 바뀐다 → 키를 박지 말고 스키마에서 이름 「분류」로 역인출한다.
+  var CATMAP = null;
+  function dbCatMap() {
+    if (CATMAP) return CATMAP;
+    CATMAP = {};
+    try {
+      var nd = window.__NEXT_DATA__;
+      if (!nd) return CATMAP;
+      var keys = {}, recs = [];
+      (function walk(o) {
+        if (!o || typeof o !== 'object') return;
+        for (var k in o) {
+          var v = o[k];
+          if (v && typeof v === 'object' && !Array.isArray(v) && v.name === '분류' && v.type === 'select') keys[k] = 1;
+        }
+        if (o.id && o.properties) recs.push(o);
+        for (var p in o) walk(o[p]);
+      })(nd);
+      recs.forEach(function (r) {
+        for (var k in keys) {
+          var v = r.properties[k];
+          if (v && v[0] && v[0][0]) { CATMAP[r.id] = String(v[0][0]); break; }
+        }
+      });
+    } catch (e) { /* 폴백으로 간다 */ }
+    return CATMAP;
+  }
+  function pageId(href) {
+    var m = String(href || '').match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
+    return m ? m[0].toLowerCase() : '';
+  }
+  // 카드에 찍는 표기 — DB 분류가 있으면 그 값(예: 소식지), 없으면 소제목 폴백.
+  // 🔴 탭·필터·검색은 계속 noticeTag(소제목)가 정한다 — 소식지는 「공지사항」 탭 안에 그대로 남는다(2026-08-23 민부장 확정).
+  function noticeLabel(n) {
+    return dbCatMap()[pageId(n.href)] || noticeTag(n);
+  }
   // 카드 태그와 같은 규칙으로 분류 탭을 만든다 — 둘이 갈리면 필터가 0건을 낸다
   function noticeCats(items) {
     var order = ['공지사항', '사업공고', '자료실'], out = [];
@@ -193,7 +230,7 @@
     });
   }
   function noticeCard(n) {
-    var tag = noticeTag(n);
+    var tag = noticeLabel(n);
     var d = n.date ? n.date.replace(/-/g, '.') : '';
     return '<a class="cb-notice" href="' + esc(n.href) + '" target="_blank" rel="noopener">' +
       '<div class="cb-notice-meta"><span class="cb-tag">' + esc(tag) + '</span>' + (d ? '<span class="cb-date">' + esc(d) + '</span>' : '') + '</div>' +

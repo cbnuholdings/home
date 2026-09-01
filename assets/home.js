@@ -34,7 +34,8 @@
         { name: '창업기업 경영진단', note: '재무·경영 진단 리포트', href: 'https://fia.cbnuholdings.com' },
         // 2026-08-18 민부장 지시: Growth Hub의 「기술이전신청」 자리를 IR PitchBuilder로(oopy 상단 메뉴와 동일). 기술이전 문의는 히어로·문의 섹션(C-TOM)이 계속 맡는다.
         { name: 'IR PitchBuilder', note: 'IR 작성·진단 도구 (접수번호·접속코드 필요)', href: 'https://pitching.cbnuholdings.com/' },
-        { name: 'R&D 기획지원', note: '정부 R&D 사업계획서 작성 · 준비 중', href: 'https://www.cbnuholdings.com/rnd' }
+        // 2026-09-01 오픈: 준비중 안내(/rnd) 경유를 끊고 라이브 주소로 직결. oopy 상단 메뉴도 같은 자리를 함께 고쳤다.
+        { name: 'R&D 기획지원', note: '사업계획서 작성·사전검증 (접속코드 필요)', href: 'https://rnd.cbnuholdings.com' }
       ] },
     { id: 'hub-project', num: '03', label: 'Program', ko: '지원사업',
       desc: '모집 중인 지원사업과 제작 지원 프로그램을 한 곳에서 확인하세요.',

@@ -41,7 +41,7 @@
       items: [
         { name: 'CBNU-INNO', note: '창업기획 접수·신청', href: 'https://inno.cbnuholdings.com' },
         { name: 'MVP 제작 지원', note: '시제품 제작 신청', href: 'https://mvp.cbnuholdings.com/' },
-        { name: 'CBNU-LIPS', note: 'LIPS 운영관리 · 준비 중', href: 'https://www.cbnuholdings.com/lips' }
+        { name: 'CBNU-LIPS', note: 'LIPS 추천 신청·접수', href: 'https://lips.cbnuholdings.com' }
       ] }
   ];
   var CATS = [

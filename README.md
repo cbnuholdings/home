@@ -15,7 +15,10 @@ assets/home.css            레이어 스타일 + oopy(노션 DOM) 보정 §9
 assets/home.js             레이어 렌더 (순수 JS). oopy 모드/단독 모드 자동 판별
 assets/*.png               CI·엠블럼·캐릭터
 data/subsidiaries.json     자회사 공개 DB 사본 (GitHub Actions가 매시 동기화)
+data/notices.json          홈 NOTICE 목록 사본 (단독 미리보기·대체용 — 라이브 카드는 페이지 DOM에서 즉시 읽는다)
 scripts/sync_subsidiaries.py  동기화 스크립트 (토큰 불요 — oopy가 발행한 /portfolio SSR을 읽는다)
+scripts/sync_notices.py    공지 동기화 스크립트 (home.js parseNotionNotice 와 같은 규칙 — 둘을 함께 고친다)
+assets/rnd.js, rnd.css     /rnd 안내 페이지 전용 레이어 (홈과 무관)
 oopy/loader.html           노션 홈 최상단 html 코드블록에 붙여넣는 로더 (홈용, data-paths="/")
 oopy/loader_staging.html   리뉴얼안(스테이징) 페이지용 로더
 .github/workflows/sync.yml 매시 17분 동기화 → 변경 시 커밋 → Pages 자동 재배포
@@ -33,7 +36,7 @@ oopy/loader_staging.html   리뉴얼안(스테이징) 페이지용 로더
 # 📃 NOTICE
 ### 공지사항          ← 그룹명이 카드 태그가 된다
 - @페이지멘션 (2026-08-07)   ← 한 줄 = 카드 1장. 날짜는 괄호, 최신순 정렬·6장 노출+더보기
-### 사업공지
+### 사업공고           ← 「사업」 부분일치라 「사업공지」로 써도 같은 탭
 - @페이지멘션 (2026-07-20)
 ### 자료실
 - @페이지멘션
@@ -50,7 +53,7 @@ oopy/loader_staging.html   리뉴얼안(스테이징) 페이지용 로더
 - **인사말·오시는 길·연락하기** → 각 노션 페이지에서 편집(즉시). 상단 메뉴 Home ▸ 하위 3건은 oopy 콘솔(스타일→상단 메뉴바)에 등록돼 있다.
 - **서비스 링크·문구·디자인 수정** → `assets/home.js`(HUBS·LINKS) / `assets/home.css` 수정 → `git push` → Pages 재배포(1~2분). oopy 쪽 변경 없음.
 - **되돌리기** → 노션 코드블록을 이전 CTA 블록으로 되돌리면 그 즉시 원래 홈. 저장소는 그대로 둔다.
-- **주의**: oopy 상단 메뉴(Home/Portfolio/Growth Hub/Project/Admin)는 oopy 대시보드 설정이다. 저장소에서 바꿀 수 없다.
+- **주의**: oopy 상단 메뉴(Home/Portfolio/Growth Hub/Program)는 oopy 대시보드 설정이다. 저장소에서 바꿀 수 없다. 서비스 카드(`home.js` HUBS)와 상단 메뉴는 관리처가 다르므로 시스템 주소를 바꾸면 **두 곳을 함께** 고친다.
 
 ## 로컬 미리보기
 ```

@@ -387,7 +387,7 @@
       (withFooter ? '<footer class="cb-footer"><div class="cb-wrap">' +
         '<div>충북대학교기술지주(주) · 대표자 김대일 · 사업자등록번호 579-87-00278<br>본사 충북 청주시 청원구 오창읍 양청4길 45 · TEL 043-249-1472(1489)</div>' +
         (NOTICE.about && NOTICE.about.length ? '<div class="cb-foot-about"><span>회사소개</span>' + aboutLinksHTML(NOTICE.about) + '</div>' : '') +
-        '<div class="cb-foot-links"><a href="' + LINKS.privacy + '" target="_blank" rel="noopener">개인정보처리방침</a><a href="' + LINKS.noEmail + '" target="_blank" rel="noopener">이메일무단수집거부</a><a href="' + LINKS.admin + '" target="_blank" rel="noopener">구성원 로그인</a><span>© 2026 CBNU Technology Holdings, Inc.</span></div>' +
+        '<div class="cb-foot-links"><a href="' + LINKS.privacy + '" target="_blank" rel="noopener">개인정보처리방침</a><a href="' + LINKS.noEmail + '" target="_blank" rel="noopener">이메일무단수집거부</a><a href="' + LINKS.admin + '" target="_blank" rel="noopener">구성원 로그인</a><span>© ' + new Date().getFullYear() + ' CBNU Technology Holdings, Inc.</span></div>' +
       '</div></footer>' : '') +
     '</div>';
   }
@@ -401,7 +401,8 @@
     var logo = safeUrl(c.logo);
     var desc = c.desc && c.desc.trim() ? esc(c.desc) : '<span class="cb-empty">대학 기술 기반 자회사</span>';
     return '<a class="cb-card" href="' + esc(href) + '" target="_blank" rel="noopener">' +
-      '<div class="cb-card-logo">' + (logo ? '<img src="' + esc(logo) + '" alt="' + esc(c.name) + ' 로고" loading="lazy" onerror="this.parentNode.innerHTML=\'<span class=&quot;cb-card-initial&quot;>' + esc(String(c.name).slice(0, 1)) + '</span>\'">' : '<span class="cb-card-initial">' + esc(String(c.name).slice(0, 1)) + '</span>') + '</div>' +
+      // 로고 실패 폴백은 인라인 onerror 가 아니라 renderGrid 의 error 리스너가 맡는다 — 회사명을 JS 문자열에 박으면 따옴표 하나에 핸들러가 깨진다
+      '<div class="cb-card-logo">' + (logo ? '<img src="' + esc(logo) + '" alt="' + esc(c.name) + ' 로고" loading="lazy" data-initial="' + esc(String(c.name).slice(0, 1)) + '">' : '<span class="cb-card-initial">' + esc(String(c.name).slice(0, 1)) + '</span>') + '</div>' +
       '<h3>' + esc(c.name) + '</h3>' + (c.ceo ? '<div class="cb-ceo">대표 ' + esc(c.ceo) + '</div>' : '') +
       '<p' + (c.desc && c.desc.trim() ? '' : ' class="cb-empty"') + '>' + desc + '</p>' +
       (c.tags && c.tags.length ? '<div class="cb-tags">' + c.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
@@ -417,6 +418,10 @@
     var shown = EXPANDED ? items : items.slice(0, LIMIT);
     grid.innerHTML = shown.length ? shown.map(cardHTML).join('') : '<div class="cb-grid-empty">해당 분야의 자회사가 아직 없습니다.</div>';
     Array.prototype.forEach.call(grid.children, function (c, i) { c.style.animationDelay = Math.min(i * 40, 400) + 'ms'; });
+    Array.prototype.forEach.call(grid.querySelectorAll('img[data-initial]'), function (img) {
+      var fallback = function () { var s = document.createElement('span'); s.className = 'cb-card-initial'; s.textContent = img.getAttribute('data-initial'); if (img.parentNode) img.parentNode.replaceChild(s, img); };
+      if (img.complete && img.naturalWidth === 0) fallback(); else img.addEventListener('error', fallback);
+    });
     var more = sec.querySelector('.cb-more-wrap');
     if (more) {
       if (items.length > shown.length) {

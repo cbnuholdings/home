@@ -11,7 +11,8 @@
 """
 import json, os, re, sys, urllib.request, datetime
 
-SRC = os.environ.get("NOTICE_SRC", "https://www.cbnuholdings.com/3bdfc8d8-805b-81ee-8f1b-e2d2cc7b0a9d")
+# 기본 원천 = 홈(/). 스테이징 페이지를 읽으려면 NOTICE_SRC 를 명시한다(예전 기본값이 스테이징이라 로컬 실행이 notices.json 을 스테이징 데이터로 덮던 함정).
+SRC = os.environ.get("NOTICE_SRC", "https://www.cbnuholdings.com/")
 OUT = os.path.join(os.path.dirname(__file__), "..", "data", "notices.json")
 SITE = "https://www.cbnuholdings.com"
 
@@ -69,8 +70,13 @@ def parse(html):
         if mode != "notice": continue
         if t in ("sub_header", "sub_sub_header"):
             group = re.sub(r"^[^\w가-힣]+", "", text); continue
+        if t == "divider":
+            group = ""; continue  # 구분선에서 절을 닫는다 (home.js 와 동일) — 뒤에 붙는 하위 페이지 블록이 회사소개로 새지 않게
         if t == "page":
-            out["about"].append({"title": text or mtitle, "href": SITE + "/" + cid}); continue
+            # 하위 페이지 블록은 「회사소개」 절 안의 것만 (home.js parseNotionNotice 와 동일 규칙)
+            if "회사소개" in group:
+                out["about"].append({"title": text or mtitle, "href": SITE + "/" + cid})
+            continue
         if t not in ("bulleted_list", "numbered_list", "text") or not link: continue
         if link.startswith("/"): link = SITE + link
         if re.search(r"quick\s*links|바로가기", group, re.I):

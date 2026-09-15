@@ -62,7 +62,8 @@
     // C-TOM(연구자·공급측) / C-TOM-D(기업·수요측 `/market`) — 2026-08-15 라이브. 정식 기술이전 신청·계약은 산단 T-Market(아웃링크 · C-TOM-D 정본 §Ⅺ-3-1)
     ctomMarket: 'https://ctom.cbnuholdings.com/market',
     ctom: 'https://ctom.cbnuholdings.com/',
-    tmarket: 'https://tmarket.cbnu.ac.kr/jobedu/category.do?key=2009172181368&goMain=Y',
+    // 2026-09-15 민부장 지시: 「산학협력단 T-Market」 안내 링크도 C-TOM으로 연결(산단 T-Market 직접 링크 폐기)
+    tmarket: 'https://ctom.cbnuholdings.com/',
     privacy: 'https://www.cbnuholdings.com/380fc8d8-805b-8012-bfc4-ce8a82439721',
     noEmail: 'https://www.cbnuholdings.com/380fc8d8-805b-809b-9bec-c89c3cffaefa'
   };

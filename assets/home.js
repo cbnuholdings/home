@@ -59,7 +59,7 @@
     // 공지 「전체 보기」는 외부 링크가 아니라 이 섹션 안에서 전 건을 펼치는 기능이다(2026-08-15).
     // 이전 notices 링크는 목록이 아니라 사업공지 글 1건(fa30f3e8…)으로 가고 있었다 → 제거.
     admin: 'https://www.cbnuholdings.com/admin',
-    // C-TOM(연구자·공급측) / C-TOM-D(기업·수요측 `/market`) — 2026-08-15 라이브. 정식 기술이전 신청·계약은 산단 T-Market(아웃링크 · C-TOM-D 정본 §Ⅺ-3-1)
+    // C-TOM(연구자·공급측) / C-TOM-D(기업·수요측 `/market`) — 2026-08-15 라이브. 정식 기술이전 신청·계약 안내도 C-TOM 기술마켓으로(2026-09-15 T-Market 아웃링크 폐기)
     ctomMarket: 'https://ctom.cbnuholdings.com/market',
     ctom: 'https://ctom.cbnuholdings.com/',
     // 2026-09-15 민부장 지시: 「산학협력단 T-Market」 안내 링크도 C-TOM으로 연결(산단 T-Market 직접 링크 폐기)
@@ -384,7 +384,7 @@
           '<a class="cb-btn cb-btn-primary" href="' + LINKS.ctomMarket + '" target="_blank" rel="noopener">기술이전 문의하기 <span>→</span></a>' +
           '<a class="cb-btn cb-btn-ghost" href="' + LINKS.ctom + '" target="_blank" rel="noopener">연구자 기술사업화 <span>→</span></a>' +
         '</div>' +
-        '<p class="cb-note">정식 기술이전 신청·계약은 <a href="' + LINKS.tmarket + '" target="_blank" rel="noopener">충북대학교 산학협력단 T-Market</a>에서 진행됩니다 · 일정 협의는 <a href="' + LINKS.booking + '" target="_blank" rel="noopener">미팅·상담 예약</a>' +
+        '<p class="cb-note">정식 기술이전 신청·계약은 <a href="' + LINKS.tmarket + '" target="_blank" rel="noopener">C-TOM 기술마켓</a>에서 진행됩니다 · 일정 협의는 <a href="' + LINKS.booking + '" target="_blank" rel="noopener">미팅·상담 예약</a>' +
           (NOTICE.about && NOTICE.about.length ? '<br><span class="cb-note-links">' + aboutLinksHTML(NOTICE.about) + '</span>' : '') + '</p>' +
       '</div></section>' +
       (withFooter ? '<footer class="cb-footer"><div class="cb-wrap">' +

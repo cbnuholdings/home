@@ -19,11 +19,11 @@
 
   var HUBS = [
     { id: 'hub-portfolio', num: '01', label: 'Portfolio', ko: '자회사',
-      desc: '대학 기술로 설립된 자회사를 확인하고, 편입·설립을 직접 신청할 수 있습니다.',
+      desc: '대학 기술로 설립된 자회사를 확인하고, 설립 신청과 자회사 현황조사를 온라인으로 진행할 수 있습니다.',
       items: [
         { name: '자회사 제도 소개', note: '편입 요건과 지분 구조 안내', href: 'https://www.cbnuholdings.com/subsidiary' },
         { name: '자회사 현황', note: '포트폴리오 기업 전체 보기', href: 'https://www.cbnuholdings.com/portfolio' },
-        { name: '자회사 편입·설립 신청', note: '온라인 접수', href: 'https://subsidiary.cbnuholdings.com/' },
+        { name: '자회사 설립 및 관리 시스템', note: '설립 신청 · 자회사 현황조사', href: 'https://subsidiary.cbnuholdings.com/' },
         // 2026-08-23 민부장 지시: 자회사 현황 안에 업무관리시스템 진입점을 별도로 둔다(로그인 게이트 — 구성원 전용).
         { name: '업무관리시스템', note: '업무 지시·진행·인수인계 (구성원 로그인)', href: 'https://work.cbnuholdings.com/' }
       ] },
@@ -299,7 +299,7 @@
   }
   function quickDesc(q) {
     var t = (q.label || '') + ' ' + (q.href || '');
-    if (/자회사.*신청|subsidiary\.cbnuholdings/i.test(t)) return '기술출자 자회사 편입·설립 온라인 접수';
+    if (/자회사.*신청|subsidiary\.cbnuholdings/i.test(t)) return '자회사 설립 및 관리 시스템 — 설립 신청·현황조사';
     if (/자회사.*현황|\/portfolio/i.test(t)) return '자회사 포트폴리오 전체 보기';
     if (/카카오|kakao/i.test(t)) return '카카오톡으로 문의·소식 받기';
     if (/mail|이메일|메일/i.test(t)) return quickSub(q);

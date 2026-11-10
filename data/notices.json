@@ -1,7 +1,13 @@
 {
  "source": "https://www.cbnuholdings.com/",
- "count": 11,
+ "count": 12,
  "items": [
+  {
+   "group": "공지사항",
+   "title": "[IBK창공-대전] 2027년 상반기 IBK창공 혁신창업 기업모집",
+   "href": "https://www.cbnuholdings.com/414fc8d8-805b-80fd-957d-e9494e588cb2",
+   "date": "2026-11-01"
+  },
   {
    "group": "공지사항",
    "title": "충북 오픈이노베이션 벤처투자조합 결성총회 개최",
@@ -24,19 +30,7 @@
    "group": "공지사항",
    "title": "충북대기술지주, 딥테크에서 로컬까지 …LIPS 운영사 선정으로 창업지원 확장",
    "href": "https://www.cbnuholdings.com/3b4fc8d8-805b-80ff-94dc-d82726149d84",
-   "date": "2026-08-05"
-  },
-  {
-   "group": "공지사항",
-   "title": "미팅 예약 시스템 오픈 안내",
-   "href": "https://www.cbnuholdings.com/d11aef5e-54a1-4cd3-9e19-6397397cd5d2",
-   "date": "2026-06-22"
-  },
-  {
-   "group": "공지사항",
-   "title": "충북대학교기술지주 카카오채널 오픈 안내",
-   "href": "https://www.cbnuholdings.com/380fc8d8-805b-803a-b8f1-f6fd04f8063d",
-   "date": "2026-06-01"
+   "date": "2026-07-28"
   },
   {
    "group": "사업공고",
@@ -49,6 +43,18 @@
    "title": "2026 이노테크 창업지원사업 선정기업 - Kick-off",
    "href": "https://www.cbnuholdings.com/fa30f3e8-43c9-4100-ba35-e6ece607e753",
    "date": "2026-07-01"
+  },
+  {
+   "group": "공지사항",
+   "title": "미팅 예약 시스템 오픈 안내",
+   "href": "https://www.cbnuholdings.com/d11aef5e-54a1-4cd3-9e19-6397397cd5d2",
+   "date": "2026-06-22"
+  },
+  {
+   "group": "공지사항",
+   "title": "충북대학교기술지주 카카오채널 오픈 안내",
+   "href": "https://www.cbnuholdings.com/380fc8d8-805b-803a-b8f1-f6fd04f8063d",
+   "date": "2026-06-01"
   },
   {
    "group": "사업공고",
@@ -101,5 +107,5 @@
    "href": "https://www.cbnuholdings.com/3bdfc8d8-805b-819e-86ff-cd0caae8359d"
   }
  ],
- "synced_at": "2026-09-15T07:42:08Z"
+ "synced_at": "2026-11-10T07:16:47Z"
 }

@@ -89,7 +89,56 @@ def parse(html):
         title = mtitle or (text[:dm.start()].strip() if dm else text) or group  # 멘션 페이지가 SSR에 없으면 그룹명(예: 자료실)으로
         if title:
             out["items"].append({"group": group or "공지", "title": title, "href": link, "date": date})
+    out["items"] = merge_db(out["items"], blocks, pp)
     return out
+
+def _rt_text(rt):
+    return "".join(str(s[0]) for s in (rt or []) if isinstance(s, list) and s and s[0] != "‣").strip()
+
+def _rt_date(rt):
+    for s in rt or []:
+        for d in (s[1] if isinstance(s, list) and len(s) > 1 else []) or []:
+            if isinstance(d, list) and len(d) > 1 and d[0] == "d" and isinstance(d[1], dict) and d[1].get("start_date"):
+                return d[1]["start_date"]
+    return ""
+
+def merge_db(manual, blocks, pp):
+    """홈페이지 DB 자동 게시 — home.js dbNotices()/mergeNotices() 와 같은 규칙.
+    분류·게시일이 있고 게시일 ≤ 오늘(KST)인 DB 글만. 사업공고 → 사업공고, 그 밖 → 공지사항.
+    DB 글은 수동 줄로 걸려 있어도 DB 규칙을 따른다(중복 제거)."""
+    today = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=9)).strftime("%Y-%m-%d")
+    cols = {}
+    def walk(o):
+        if isinstance(o, dict):
+            sc = o.get("schema")
+            if o.get("id") and isinstance(sc, dict):
+                ck = {}
+                for k, p in sc.items():
+                    if isinstance(p, dict) and p.get("name") == "분류" and p.get("type") == "select": ck["cat"] = k
+                    if isinstance(p, dict) and p.get("name") == "게시일" and p.get("type") == "date": ck["date"] = k
+                if "cat" in ck and "date" in ck: cols[o["id"]] = ck
+            for x in o.values(): walk(x)
+        elif isinstance(o, list):
+            for x in o: walk(x)
+    walk(pp)
+    auto, dbids = [], set()
+    for bid, b in blocks.items():
+        v = b.get("value", b); v = v.get("value", v)
+        ck = cols.get(v.get("parent_id"))
+        if v.get("parent_table") != "collection" or not ck or v.get("alive") is False: continue
+        dbids.add(v.get("id", bid))
+        props = v.get("properties") or {}
+        cat, date, title = _rt_text(props.get(ck["cat"])), _rt_date(props.get(ck["date"])), _rt_text(props.get("title"))
+        if not (cat and date and title) or date > today: continue
+        auto.append({"group": "사업공고" if cat == "사업공고" else "공지사항", "title": title, "href": SITE + "/" + v.get("id", bid), "date": date})
+    if not auto: return manual
+    auto.sort(key=lambda n: n["date"], reverse=True)
+    titles = {re.sub(r"\s+", "", n["title"]) for n in auto}
+    idre = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", re.I)
+    def keep(n):
+        m = idre.search(n.get("href", ""))
+        return not (m and m.group(0).lower() in dbids) and re.sub(r"\s+", "", n.get("title", "")) not in titles
+    return auto + [n for n in manual if keep(n)]
 
 def main():
     check = "--check" in sys.argv

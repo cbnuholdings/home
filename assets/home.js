@@ -227,6 +227,54 @@
     var m = String(href || '').match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
     return m ? m[0].toLowerCase() : '';
   }
+  // 「홈페이지 DB」 자동 게시(2026-11-10) — 홈 본문의 링크드 뷰 「홈 자동게시」 덕분에 DB 글 전체가 SSR에 실려 온다.
+  // 규칙: 분류가 있고 게시일 ≤ 오늘(KST)인 글만. 사업공고 → 「사업공고」 탭, 그 밖의 분류(공지사항·소식지·채용·행사·기타) → 「공지사항」 탭.
+  // 🔴 날짜 판정은 노션 필터가 아니라 여기서 한다 — oopy SSR 캐시 때문에 노션 「오늘」 필터는 예약 글을 제날짜에 못 띄운다.
+  // 🔴 속성 키는 박지 않고 스키마에서 이름(분류·게시일)으로 역인출한다. scripts/sync_notices.py 와 같은 규칙.
+  function kstToday() { return new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10); }
+  function rtText(rt) { return (rt || []).map(function (s) { return s && s[0] !== '‣' ? String(s[0]) : ''; }).join('').trim(); }
+  function rtDate(rt) {
+    var d = '';
+    (rt || []).forEach(function (s) { (s && s[1] || []).forEach(function (x) { if (x && x[0] === 'd' && x[1] && x[1].start_date && !d) d = x[1].start_date; }); });
+    return d;
+  }
+  var DBIDS = {};
+  function dbNotices() {
+    var out = [], today = kstToday();
+    try {
+      var nd = window.__NEXT_DATA__; if (!nd) return out;
+      var cols = {}, recs = {};
+      (function walk(o) {
+        if (!o || typeof o !== 'object') return;
+        if (o.id && o.schema && typeof o.schema === 'object' && !Array.isArray(o.schema)) {
+          var ck = {}, sc = o.schema;
+          for (var k in sc) { var p = sc[k]; if (p && p.name === '분류' && p.type === 'select') ck.cat = k; if (p && p.name === '게시일' && p.type === 'date') ck.date = k; }
+          if (ck.cat && ck.date) cols[o.id] = ck;
+        }
+        if (o.id && o.parent_table === 'collection' && o.properties && o.alive !== false) recs[o.id] = o;
+        for (var q in o) walk(o[q]);
+      })(nd);
+      for (var id in recs) {
+        var r = recs[id], ck = cols[r.parent_id];
+        if (!ck) continue;
+        DBIDS[id] = 1;
+        var cat = rtText(r.properties[ck.cat]), date = rtDate(r.properties[ck.date]), title = rtText(r.properties.title);
+        if (!cat || !date || !title || date > today) continue;
+        out.push({ group: cat === '사업공고' ? '사업공고' : '공지사항', title: title, href: 'https://www.cbnuholdings.com/' + id, date: date });
+      }
+    } catch (e) { /* 실패하면 수동 목록만 쓴다 */ }
+    return out;
+  }
+  // 자동분 + 노션 NOTICE 수동 줄(DB 밖 항목 — 자료실 등). DB 글은 수동 줄로 걸려 있어도 DB 규칙(게시일)을 따른다.
+  function mergeNotices(manual, auto) {
+    if (!auto.length) return manual;
+    var titles = {};
+    auto.forEach(function (n) { titles[n.title.replace(/\s+/g, '')] = 1; });
+    return auto.concat(manual.filter(function (n) {
+      var id = pageId(n.href);
+      return !(id && DBIDS[id]) && !titles[(n.title || '').replace(/\s+/g, '')];
+    }));
+  }
   // 카드에 찍는 표기 — DB 분류가 있으면 그 값(예: 소식지), 없으면 소제목 폴백.
   // 🔴 탭·필터·검색은 계속 noticeTag(소제목)가 정한다 — 소식지는 「공지사항」 탭 안에 그대로 남는다(2026-08-23 민부장 확정).
   function noticeLabel(n) {
@@ -523,6 +571,7 @@
     var col = scroller.firstElementChild || scroller;
     document.documentElement.classList.add('cbnu-oopy');
     NOTICE = parseNotionNotice(content);
+    NOTICE.items = mergeNotices(NOTICE.items, dbNotices());
     // 공지를 읽었으면 노션 본문은 데이터 원천으로만 쓰고 화면에서는 숨긴다(레이어가 못 뜨면 본문이 그대로 보이는 안전망 유지)
     if (NOTICE.items.length) document.documentElement.classList.add('cbnu-hide-body'); else document.documentElement.classList.remove('cbnu-hide-body');
     var home = el('<div id="cbnu-home"></div>');

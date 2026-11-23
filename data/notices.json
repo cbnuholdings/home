@@ -1,7 +1,13 @@
 {
  "source": "https://www.cbnuholdings.com/",
- "count": 12,
+ "count": 13,
  "items": [
+  {
+   "group": "공지사항",
+   "title": "[IBK창공] Fly High with 충남대학교·충북대학교 행사 안내",
+   "href": "https://www.cbnuholdings.com/421fc8d8-805b-80f7-b5a2-f9e2653f95db",
+   "date": "2026-11-09"
+  },
   {
    "group": "공지사항",
    "title": "[IBK창공-대전] 2027년 상반기 IBK창공 혁신창업 기업모집",
@@ -107,5 +113,5 @@
    "href": "https://www.cbnuholdings.com/3bdfc8d8-805b-819e-86ff-cd0caae8359d"
   }
  ],
- "synced_at": "2026-11-10T07:16:47Z"
+ "synced_at": "2026-11-23T07:45:28Z"
 }
